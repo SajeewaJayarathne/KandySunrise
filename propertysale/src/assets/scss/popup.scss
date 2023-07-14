@@ -1,0 +1,27 @@
+.vue-modal {
+  @apply fixed top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto bg-gray-800/40 z-50;
+}
+
+.vue-modal-inner {
+  @apply w-4/5 h-full m-auto flex;
+}
+
+.vue-modal-content {
+  @apply relative bg-clip-padding rounded-md p-14 h-4/5 m-auto;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url("../images/bg_2.jpg");
+
+
+  > button {
+    @apply absolute top-2 right-2;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

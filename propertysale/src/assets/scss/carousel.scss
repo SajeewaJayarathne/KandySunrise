@@ -1,0 +1,52 @@
+@import "utils";
+
+.carousel__slide {
+  @apply p-2.5 opacity-90 overflow-hidden;
+}
+
+.carousel__prev, .carousel__next {
+  @apply box-content glassmorphism rounded transition;
+
+  &:hover {
+    @apply bg-gray-200/75 text-black;
+  }
+}
+
+.carousel__prev {
+  @apply -left-[5%]
+}
+
+.carousel__next {
+  @apply -right-[5%];
+}
+
+.carousel__pagination-button::after {
+  @apply w-2 h-2 rounded-xl;
+}
+
+.carousel__track {
+  transform-style: preserve-3d;
+}
+
+.carousel__slide--sliding {
+  transition: 0.5s;
+}
+
+.carousel__slide--prev {
+  @apply opacity-100;
+}
+
+.carousel__slide--next {
+  @apply opacity-100;
+}
+
+.carousel__item {
+  @apply overflow-hidden transition-all duration-700;
+
+  &:hover {
+    @apply scale-110 origin-center;
+  }
+}
+.carousel__slide--active {
+  @apply opacity-100;
+}

@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "header";
+@import "main-content";
+@import "carousel";
+@import "popup";
+@import "animations";
+@import "tabs";
+
+body {
+  @apply font-main;
+}
+
+p {
+  @apply font-body;
+}
+
+h1 {
+  @apply text-3xl md:text-5xl lg:text-8xl font-bold;
+}
+
+h2 {
+  @apply text-xl md:text-4xl lg:text-6xl font-bold;
+}
+
+h3 {
+  @apply text-xl md:text-4xl lg:text-5xl font-bold;
+}
+
+h4 {
+  @apply text-lg md:text-3xl lg:text-4xl font-bold;
+}
+
+h5 {
+  @apply text-base md:text-lg lg:text-xl font-bold;
+}
+
+h6 {
+  @apply font-bold;
+}
+
+.button-primary {
+  @apply w-auto py-2.5 px-3 bg-gray-50 text-black font-bold transition;
+
+  &:hover {
+    @apply bg-gray-800 text-white;
+  }
+}

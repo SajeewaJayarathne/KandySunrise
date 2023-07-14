@@ -1,0 +1,7 @@
+/* Colours */
+$gray-200: rgb(229 231 235);
+
+.glassmorphism {
+  @apply bg-white/20 shadow backdrop-blur-sm;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}

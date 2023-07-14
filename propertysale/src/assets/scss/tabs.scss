@@ -1,0 +1,29 @@
+@import "utils";
+
+.tabs {
+  @apply p-6 glassmorphism rounded-xl;
+
+  .tabs_header {
+    @apply flex justify-between w-full;
+
+    > li {
+      @apply px-4 py-2 transition;
+      border-bottom: 2px solid !important;
+      border-color: transparent !important;
+
+      &:hover {
+        @apply bg-gray-200;
+      }
+
+      &.tab_active {
+        border-color: $gray-200 !important;
+      }
+    }
+
+
+
+    /*button.tabs_button {
+      @apply
+    }*/
+  }
+}

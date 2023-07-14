@@ -5,7 +5,20 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      zIndex: {
+        '200': '200',
+      },
+      margin: {
+        '7pct': '7%',
+        '10pct': '10%',
+        '12pct': '12%'
+      },
+      fontFamily: {
+        main: ['Gill Sans', 'sans-serif'],
+        body: ['Georgia', 'serif']
+      }
+    },
   },
   plugins: [],
 }

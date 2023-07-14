@@ -1,16 +1,18 @@
-<script setup>
-
-</script>
-
 <template>
-  <div class="hello">
-    Hello world!
-    <span class="hello-child">
-      This is the child...
-    </span>
-  </div>
+  <Content/>
 </template>
 
-<style lang="sass">
+<script>
+import Content from "./components/content.vue";
 
+export default {
+  name: "APP",
+  components: {
+    Content
+  }
+}
+</script>
+
+<style scoped lang="scss">
+@import './assets/scss/style.scss';
 </style>
