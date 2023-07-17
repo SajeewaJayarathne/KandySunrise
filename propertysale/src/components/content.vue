@@ -3,7 +3,7 @@
     <nav>
       <ul class="navmenu">
         <li v-for="item in navItems" class="item">
-          <a :href="item.href">{{item.label}}</a>
+          <a :href="'#' + item.id">{{item.label}}</a>
         </li>
       </ul>
     </nav>
@@ -32,7 +32,7 @@ import { ref } from 'vue';
 import SectionHero from "./main-sections/section-hero.vue";
 import SectionAbout from "./main-sections/section-about.vue";
 import SectionHighlights from "./main-sections/section-highlights.vue";
-import SectionAmenities from "./main-sections/section-amenities.vue";
+import SectionAmenities from "./main-sections/section-features.vue";
 
 export default {
   components: {
@@ -43,11 +43,11 @@ export default {
   },
   setup() {
     const navItems = ref([
-      {id: 'about', href: '#about', label: 'About'},
-      {id: 'highlights', href: '#highlights', label: 'Highlights'},
-      {id: 'amenities', href: '#amenities', label: 'Amenities'},
-      {id: 'rooms', href: '#rooms', label: 'Rooms'},
-      {id: 'gallery', href: '#gallery', label: 'Gallery'}
+      {id: 'about', label: 'About'},
+      {id: 'highlights', label: 'Highlights'},
+      {id: 'features', label: 'Amenities'},
+      {id: 'rooms', label: 'Rooms'},
+      {id: 'gallery', label: 'Gallery'}
     ]);
 
     return {

@@ -51,4 +51,13 @@
       }
     }
   }
+
+  .property-features {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url("../images/bg_2.jpg");
+    @apply bg-center bg-no-repeat bg-cover relative;
+
+    .tabs {
+      @apply h-full;
+    }
+  }
 }
