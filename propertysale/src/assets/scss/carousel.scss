@@ -50,3 +50,30 @@
 .carousel__slide--active {
   @apply opacity-100;
 }
+
+.gallery {
+  .carousel__item {
+    @apply transition-none;
+
+    &:hover {
+      @apply scale-100;
+    }
+  }
+
+  .carousel__prev {
+    @apply left-[2%];
+  }
+
+  .carousel__next {
+    @apply right-[2%];
+  }
+}
+
+.gallery-thumbnails .carousel__item {
+  @apply cursor-pointer;
+
+  img.active-img {
+    @apply border-4 border-white shadow rounded-xl;
+  }
+}
+

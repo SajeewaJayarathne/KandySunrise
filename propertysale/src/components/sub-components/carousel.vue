@@ -1,7 +1,7 @@
 <template>
   <Carousel :items-to-show="slidesToShow" :wrap-around="true" :transition="500">
     <Slide v-for="slide in slides" :key="slide.id">
-      <div class="carousel__item h-96 w-full rounded relative">
+      <div class="carousel__item h-96 w-full rounded relative cursor-pointer" @click="openPopup(slide.id)">
         <img
             :src="'../src/assets/images/' + slide.imgName"
             :alt="slide.title"
@@ -25,9 +25,9 @@
       <img
           :src="'../src/assets/images/' + selectedSlide.imgName"
           :alt="selectedSlide.title"
-          class="h-full w-full object-cover rounded animate glow"
+          class="h-full w-full object-cover rounded animate fade"
       />
-      <div class="flex flex-col animate glow delay-1s">
+      <div class="flex flex-col animate fade">
         <h4>{{selectedSlide.title}}</h4>
         <p class="mb-auto mt-12 leading-7">{{selectedSlide.details}}</p>
       </div>
@@ -84,8 +84,7 @@ export default {
       selectedSlide,
       openPopup: openPopup
     };
-
-  },
+  }
 };
 </script>
 
