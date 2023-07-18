@@ -1,0 +1,17 @@
+@import "utils";
+
+form.contact-form {
+  @apply p-8 glassmorphism rounded-xl;
+
+  > div {
+    @apply mb-6 w-full flex flex-col;
+
+    > input, > textarea {
+      @apply w-full p-2 pb-1 bg-transparent border-b-2 border-gray-400 text-white;
+
+      &::-webkit-calendar-picker-indicator{
+        filter: invert(1);
+      }
+    }
+  }
+}
