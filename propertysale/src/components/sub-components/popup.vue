@@ -1,5 +1,4 @@
 <template>
-  <transition name="fade">
     <div class="vue-modal" v-show="open">
       <transition name="slide">
         <div class="vue-modal-inner">
@@ -12,7 +11,6 @@
         </div>
       </transition>
     </div>
-  </transition>
 </template>
 
 <script>

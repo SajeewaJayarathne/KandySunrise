@@ -1,14 +1,16 @@
 @layer {
   header {
-    @apply overflow-hidden fixed left-0 top-0 w-full z-200 h-14 bg-white;
+    @apply overflow-hidden fixed left-0 top-0 w-full z-200 h-14 bg-transparent text-white;
   }
 
   nav {
+    @apply transition;
+
     .navmenu {
       @apply list-none flex flex-wrap justify-between md:justify-center items-center lg:items-start lg:flex-nowrap lg:bg-none;
 
       > li.item {
-        @apply lg:order-1 lg:relative lg:block lg:w-auto;
+        @apply lg:order-1 lg:relative lg:block lg:w-auto transition;
 
         > a {
           @apply block py-4 px-6 cursor-pointer transition font-bold;
@@ -17,6 +19,14 @@
             @apply bg-slate-300;
           }
         }
+      }
+    }
+
+    &.onScroll {
+      @apply shadow bg-white;
+
+      ul.navmenu li {
+        @apply text-black;
       }
     }
   }

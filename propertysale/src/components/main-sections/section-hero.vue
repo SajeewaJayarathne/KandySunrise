@@ -1,15 +1,15 @@
 <template>
-  <section id="hero-image" class="hero-image">
+  <section id="home" class="hero">
+    <div class="hero-image">
+      <picture>
+        <img src="../../../src/assets/images/Hero_1.jpg" alt="Kandy Sunrise">
+      </picture>
+    </div>
+
     <div class="hero-content">
-      <div class="hero-content-text">
-        <h1>Luxury Redefined</h1>
-        <h3 class="mt-8 font-body">"Kandy Sunrise"</h3>
-        <h5 class="mt-8 flex items-center">
-          <IconLocation :fill-colour="'white'" class="mr-2 h-full"/>
-          Kandy, Sri Lanka
-        </h5>
-        <button class="button-primary mt-12">Schedule a Visit ></button>
-      </div>
+      <h1>Luxury Redefined</h1>
+      <h3 class="mt-8 font-body italic">"Kandy Sunrise"</h3>
+      <a href="#schedule" type="button" class="button-primary mt-8">Schedule a Visit ></a>
     </div>
   </section>
 </template>

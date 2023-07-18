@@ -7,7 +7,7 @@
         :class="selectedTabId === tab.tabId ? 'tab_active' : ''"
         @click="onSelectTab(tab.tabId, tab.title)"
       >
-        <button type="button" class="tabs_button">
+        <button type="button" class="tabs_button font-bold">
           {{ tab.title }}
         </button>
       </li>
@@ -38,6 +38,7 @@ export default {
 
     function onSelectTab (tabId, title) {
       selectedTitle.value = title;
+      selectedTabId.value = tabId;
       callCustomFn(tabId)
     }
 

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav>
+    <nav :class="{ 'onScroll': !view.topOfPage}">
       <ul class="navmenu">
         <li v-for="item in navItems" class="item">
           <a :href="'#' + item.id">{{ item.label }}</a>

@@ -1,3 +1,5 @@
+@import "animations";
+
 .vue-modal {
   @apply fixed top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto bg-gray-800/40 z-50;
 }
@@ -10,18 +12,10 @@
   @apply relative bg-clip-padding rounded-md p-14 h-4/5 m-auto;
   background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url("../images/bg_2.jpg");
 
+  animation-name: zoom;
+  animation-duration: 0.6s;
 
   > button {
     @apply absolute top-2 right-2;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }

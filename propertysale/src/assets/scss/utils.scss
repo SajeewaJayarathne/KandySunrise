@@ -2,6 +2,8 @@
 $gray-200: rgb(229 231 235);
 $gray-300: rgb(209 213 219);;
 
+$hero-bg-mix: rgba(#29042f, 0.4); // hide with false
+
 .glassmorphism {
   @apply bg-white/20 shadow backdrop-blur-sm;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;

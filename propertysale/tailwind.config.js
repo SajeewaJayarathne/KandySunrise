@@ -17,7 +17,10 @@ module.exports = {
       fontFamily: {
         main: ['Gill Sans', 'sans-serif'],
         body: ['Georgia', 'serif']
-      }
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
   },
   plugins: [],

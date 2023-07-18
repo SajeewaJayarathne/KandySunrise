@@ -9,6 +9,7 @@
 
 <script>
 import {ref} from 'vue';
+
 import Carousel from '../sub-components/carousel.vue';
 
 export default {

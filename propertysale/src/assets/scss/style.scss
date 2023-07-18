@@ -8,6 +8,11 @@
 @import "popup";
 @import "animations";
 @import "tabs";
+@import "contact-form";
+
+html {
+  @apply scroll-smooth;
+}
 
 body {
   @apply font-main;
@@ -42,9 +47,17 @@ h6 {
 }
 
 .button-primary {
-  @apply w-auto py-2.5 px-3 bg-gray-50 text-black font-bold transition;
+  @apply w-auto py-3 px-4 bg-gray-50 text-black font-bold transition;
 
   &:hover {
     @apply bg-gray-800 text-white;
+  }
+}
+
+.button-secondary {
+  @apply w-fit py-3 px-4 bg-gray-300 text-black font-bold transition;
+
+  &:hover {
+    @apply bg-gray-700 text-white;
   }
 }
