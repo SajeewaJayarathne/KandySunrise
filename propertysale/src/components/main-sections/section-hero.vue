@@ -8,7 +8,7 @@
 
     <div class="hero-content">
       <h1>Luxury Redefined</h1>
-      <h3 class="mt-8 font-body italic">"Kandy Sunrise"</h3>
+      <h2 class="mt-8 font-sub-heading" style="text-shadow: 4px 4px 4px #372d35;">Kandy Sunrise</h2>
       <a href="#schedule" type="button" class="button-primary mt-8">Schedule a Visit ></a>
     </div>
   </section>

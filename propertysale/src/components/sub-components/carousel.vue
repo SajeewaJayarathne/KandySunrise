@@ -20,14 +20,14 @@
     </template>
   </Carousel>
 
-  <Popup :open="isOpen" @close="isOpen = !isOpen">
+  <Popup :open="isOpen" @close="isOpen = false">
     <div class="h-full grid grid-cols-2 gap-x-14">
       <img
           :src="'../src/assets/images/' + selectedSlide.imgName"
           :alt="selectedSlide.title"
-          class="h-full w-full object-cover rounded animate fade"
+          class="h-full w-full object-cover rounded"
       />
-      <div class="flex flex-col animate fade">
+      <div class="flex flex-col">
         <h4>{{selectedSlide.title}}</h4>
         <p class="mb-auto mt-12 leading-7">{{selectedSlide.details}}</p>
       </div>

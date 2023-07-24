@@ -15,10 +15,7 @@
 
 @layer {
   .hero {
-    @apply grid relative place-items-center overflow-hidden h-screen;
-
-    animation: clip 1.25s cubic-bezier(0.29, 0.8, 0.8, 0.98);
-    will-change: clip-path;
+    @apply grid relative place-items-center overflow-hidden h-screen clip;
 
     &-image, &-content {
       @apply self-center;
@@ -29,25 +26,15 @@
 
     // Images
     &-image {
-      @apply grid fixed z-0 grid-cols-[1fr] grid-rows-[1fr] place-items-center;
-
-      animation: fade-in 0.75s linear;
-      will-change: opacity;
+      @apply grid fixed z-0 grid-cols-[1fr] grid-rows-[1fr] place-items-center animate fade-in;
 
       // Smoothing background gradient
-      @if ($hero-bg-mix) {
-        &::before {
-          @apply content-[""] block absolute z-10 -inset-[10%] bg-blend-screen;
-
-          background: $hero-bg-mix;
-        }
+      &::before {
+        @apply content-[""] block absolute z-10 -inset-[10%] bg-blend-screen bg-primary/40;
       }
 
       & picture {
-        @apply flex h-screen w-screen;
-
-        animation: scaling 4s 0.25s cubic-bezier(0, 0.71, 0.4, 0.97) forwards;
-        will-change: transform;
+        @apply flex h-screen w-screen animate scaling;
       }
 
       & img {
@@ -56,13 +43,11 @@
     }
 
     &-content {
-      @apply absolute left-[10%] text-white opacity-0 w-1/3;
-
-      animation: fade-in 0.75s 1.5s linear forwards;
+      @apply absolute left-[10%] text-white opacity-0 w-1/3 hero-content-animation;
     }
   }
 
-  .property-about {
+  .section-about {
     .features > div {
       @apply flex items-center py-5;
 
@@ -70,25 +55,13 @@
         @apply pl-6 w-full;
 
         > span {
-          @apply text-gray-400;
+          @apply text-tertiary;
         }
-      }
-    }
-
-    .show-on-scroll {
-      opacity: 0;
-      transform: translateY(4em) rotateZ(-6deg);
-      transition: transform 2s .25s cubic-bezier(0, 1, .3, 1), opacity .3s .25s ease-out;
-      will-change: transform, opacity;
-
-      &.is-visible {
-        opacity: 1;
-        transform: rotateZ(0);
       }
     }
   }
 
-  .property-features {
+  .section-features {
     .tabs {
       @apply h-full;
     }
@@ -106,35 +79,37 @@
     }
   }
 
-  .property-gallery {
+  .section-gallery {
     div.filter-item {
       @apply transition;
       border-bottom: 2px solid !important;
       border-color: transparent !important;
 
       &:hover {
-        @apply bg-gray-200;
+        @apply bg-tertiary;
       }
 
       &.active-filter {
-        border-color: $gray-300 !important;
+        border-color: $blue_1 !important;
       }
     }
   }
 
   .main-content > section {
     &:nth-child(odd) {
-      @apply relative;
-      background: radial-gradient(circle, rgb(194, 192, 192) 0%, rgba(239, 239, 239, 0.95) 35%, rgba(255, 255, 255, 1) 100%);
+      @apply bg-center bg-white bg-no-repeat bg-cover relative text-primary;
     }
 
     &:nth-child(even) {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url("../images/bg_2.jpg");
-      @apply bg-center bg-no-repeat bg-cover relative;
+      @apply bg-center bg-blue_2 bg-no-repeat bg-cover relative text-primary;
     }
 
-    &:first-child, &.property-visit {
+    &:first-child {
       background: unset;
+    }
+
+    &.section-schedule {
+      @apply bg-secondary text-blue_2;
     }
   }
 }

@@ -18,10 +18,6 @@ body {
   @apply font-main;
 }
 
-p {
-  @apply font-body;
-}
-
 h1 {
   @apply text-3xl md:text-5xl lg:text-8xl font-bold;
 }
@@ -46,18 +42,26 @@ h6 {
   @apply font-bold;
 }
 
-.button-primary {
-  @apply w-auto py-3 px-4 bg-gray-50 text-black font-bold transition;
+[class^="button-"] {
+  @apply w-auto py-4 px-6 font-bold transition duration-200 text-white;
 
   &:hover {
-    @apply bg-gray-800 text-white;
+    @apply rounded-lg;
+  }
+}
+
+.button-primary {
+  @apply bg-secondary;
+
+  &:hover {
+    @apply bg-primary;
   }
 }
 
 .button-secondary {
-  @apply w-fit py-3 px-4 bg-gray-300 text-black font-bold transition;
+  @apply bg-blue_1;
 
   &:hover {
-    @apply bg-gray-700 text-white;
+    @apply bg-blue_2 text-blue_1;
   }
 }

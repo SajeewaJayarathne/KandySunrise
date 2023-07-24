@@ -1,15 +1,15 @@
 <template>
-  <section id="features" class="property-features w-full h-auto p-32">
+  <section id="features" class="section-features w-full h-auto p-32" ref="secFeatures">
     <h2>Property Features</h2>
     <div class="grid grid-cols-2 grid-rows-1 gap-x-20 mt-12 max-h-[70vh] h-[70vh]">
-      <div class="col-start-1 row-start-1 rounded show-on-scroll" ref="imageFeature" :class="{'is-visible': isVisible}">
-        <img class="h-full object-cover aspect-square brightness-110 rounded transition delay-300"
+      <div class="col-start-1 row-start-1 rounded" :class="{'slide-right': isVisible}">
+        <img class="h-full object-cover aspect-square brightness-110 rounded transition"
              :src="'../src/assets/images/' + selectedImg.imgName"
              :alt="selectedImg.alt"
         />
       </div>
 
-      <div class="col-start-2 row-start-1">
+      <div class="col-start-2 row-start-1" :class="{'slide-left': isVisible}">
         <TabWrapper :onClickTab="onClickTab">
           <Tab :title="'Floor Details'" :tabId="0">
             <div class="mt-8">
@@ -48,51 +48,38 @@
   </section>
 </template>
 
-<script>
-import {ref, onMounted} from 'vue';
+<script setup>
+import {ref} from 'vue';
 
 import TabWrapper from '../sub-components/tab-wrapper.vue';
 import Tab from '../sub-components/tab.vue';
 
 import Utils from "../utils.js"
 
-export default {
-  components: {
-    TabWrapper,
-    Tab
-  },
-  props: ['imgRef'],
-  setup() {
-    const isVisible = ref(false);
-    const imageFeature = ref(null);
+const isVisible = ref(false);
+const secFeatures = ref(null);
 
-    const imagesArr = ref([
-      {imgName: 'Hero_2.jpg', alt: 'Floor Details'},
-      {imgName: 'Hero_3.jpg', alt: 'Bedroom Details'},
-      {imgName: 'Hero_2.jpg', alt: 'Property Details'}
-    ]);
+const imagesArr = ref([
+  {imgName: 'Hero_2.jpg', alt: 'Floor Details'},
+  {imgName: 'Hero_3.jpg', alt: 'Bedroom Details'},
+  {imgName: 'Hero_2.jpg', alt: 'Property Details'}
+]);
 
-    const selectedImg = ref(imagesArr.value[0]);
+const selectedImg = ref(imagesArr.value[0]);
 
-    onMounted(() => {
-      animationLoop();
-    });
-
-    function animationLoop() {
-      isVisible.value = Utils.isElementInViewport(imageFeature.value);
-      window.requestAnimationFrame(animationLoop);
-    }
-
-    function onClickTab(tabId) {
-      selectedImg.value = imagesArr.value[tabId];
-    }
-
-    return {
-      onClickTab,
-      selectedImg,
-      imageFeature,
-      isVisible
-    }
+function handleScroll() {
+  if (!isVisible.value) {
+    isVisible.value = Utils.isElementInViewport(secFeatures.value);
   }
+
+  return isVisible.value;
 }
+
+function onClickTab(tabId) {
+  selectedImg.value = imagesArr.value[tabId];
+}
+
+defineExpose({
+  handleScroll
+});
 </script>

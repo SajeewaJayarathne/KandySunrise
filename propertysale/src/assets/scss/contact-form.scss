@@ -4,12 +4,32 @@ form.contact-form {
   @apply p-8 glassmorphism rounded-xl;
 
   > div {
-    @apply mb-6 w-full flex flex-col;
+    @apply mb-6 w-full flex;
 
     > input, > textarea {
-      @apply w-full p-2 pb-1 bg-transparent border-b-2 border-gray-400 text-white;
+      @apply w-full p-2 pb-1 bg-transparent border-b-2 border-blue_1 text-blue_2;
 
-      &::-webkit-calendar-picker-indicator{
+      &:first-child {
+        @apply mr-1;
+      }
+
+      &:last-child {
+        @apply ml-1;
+      }
+
+      &:only-child {
+        @apply mx-0;
+      }
+
+      &:focus-visible {
+        @apply outline-1 outline-tertiary;
+      }
+
+      &::placeholder {
+        @apply text-gray-200;
+      }
+
+      &::-webkit-calendar-picker-indicator {
         filter: invert(1);
       }
     }

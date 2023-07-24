@@ -1,10 +1,8 @@
 /* Colours */
-$gray-200: rgb(229 231 235);
-$gray-300: rgb(209 213 219);;
-
-$hero-bg-mix: rgba(#29042f, 0.4); // hide with false
+$blue_1: rgba(78, 89, 108, 1);
+$blue_2: rgba(218, 232, 241, 1);
 
 .glassmorphism {
-  @apply bg-white/20 shadow backdrop-blur-sm;
+  @apply bg-white/20 shadow-xl backdrop-blur-sm;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }

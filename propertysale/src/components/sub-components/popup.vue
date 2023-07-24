@@ -5,7 +5,7 @@
           <div class="vue-modal-content">
             <slot/>
             <button type="button" @click="$emit('close')">
-              <IconClose :fill-colour="'#1F2937B2'" />
+              <IconClose :fill-colour="'#f5fdff'" />
             </button>
           </div>
         </div>

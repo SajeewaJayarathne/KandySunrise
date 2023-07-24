@@ -12,11 +12,11 @@
       border-color: transparent !important;
 
       &:hover {
-        @apply bg-gray-200;
+        @apply bg-tertiary;
       }
 
       &.tab_active {
-        border-color: $gray-200 !important;
+        border-color: $blue_1 !important;
       }
     }
   }

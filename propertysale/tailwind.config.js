@@ -9,18 +9,20 @@ module.exports = {
       zIndex: {
         '200': '200',
       },
-      margin: {
-        '7pct': '7%',
-        '10pct': '10%',
-        '12pct': '12%'
-      },
       fontFamily: {
-        main: ['Gill Sans', 'sans-serif'],
-        body: ['Georgia', 'serif']
+        main: ['EB Garamond', 'serif'],
+        'sub-heading': ['Tangerine', 'serif']
       },
       aspectRatio: {
         '4/3': '4 / 3',
       },
+      colors: {
+        primary: '#372d35',
+        secondary: '#997e81',
+        tertiary: '#c4b6bf',
+        blue_1: '#4e596c',
+        blue_2: '#f5fdff'
+      }
     },
   },
   plugins: [],

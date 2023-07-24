@@ -1,6 +1,6 @@
 <template>
-  <section id="highlights" class="property-highlights w-full h-auto p-32 text-center">
-    <h3>Property Highlights</h3>
+  <section id="highlights" class="section-highlights w-full h-auto p-32 text-center">
+    <h2>Property Highlights</h2>
     <div class="mt-12">
       <Carousel :slides="slides" :slides-to-show="3" />
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <section id="about" class="property-about w-full h-auto p-32">
+  <section id="about" class="section-about w-full h-auto p-32" ref="secAbout">
     <div class="grid grid-cols-2 grid-rows-1 gap-x-20">
-      <div class="col-start-1 row-start-1">
+      <div class="col-start-1 row-start-1" :class="{'slide-right': isVisible}">
         <h2>A Sanctuary of<br>Luxury & Serenity</h2>
         <p class="my-7">Experience the epitome of luxury living near Kandy with this exquisite house for sale. Located
           just 3km from
@@ -177,49 +177,37 @@
         </TabWrapper>
       </div>
 
-      <div class="col-start-2 row-start-1 rounded">
+      <div class="col-start-2 row-start-1 rounded" :class="{'slide-left': isVisible}">
         <img
             src="../../assets/images/Staircase.jpg"
             alt="Staircase"
-            ref="imageAbout"
-            :class="{'is-visible': isVisible}"
-            class="h-full object-cover aspect-square brightness-110 rounded show-on-scroll"
+            class="h-auto object-cover aspect-square brightness-110 rounded"
         />
       </div>
     </div>
   </section>
 </template>
 
-<script>
-import {ref, onMounted} from 'vue';
+<script setup>
+import {ref} from 'vue';
 
 import TabWrapper from '../sub-components/tab-wrapper.vue';
 import Tab from '../sub-components/tab.vue';
 
 import Utils from "../utils.js"
 
-export default {
-  components: {
-    TabWrapper,
-    Tab
-  },
-  setup() {
-    const isVisible = ref(false);
-    const imageAbout = ref(null);
+const isVisible = ref(false);
+const secAbout = ref(null);
 
-    onMounted(() => {
-      animationLoop();
-    });
-
-    function animationLoop() {
-      isVisible.value = Utils.isElementInViewport(imageAbout.value);
-      window.requestAnimationFrame(animationLoop);
-    }
-
-    return {
-      isVisible,
-      imageAbout
-    };
+function handleScroll () {
+  if (!isVisible.value) {
+    isVisible.value = Utils.isElementInViewport(secAbout.value);
   }
+
+  return isVisible.value;
 }
+
+defineExpose({
+  handleScroll
+});
 </script>

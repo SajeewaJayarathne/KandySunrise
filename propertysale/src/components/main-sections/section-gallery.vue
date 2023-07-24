@@ -1,8 +1,8 @@
 <template>
-  <section id="gallery" class="property-gallery w-full h-auto p-32">
-    <h3>Gallery</h3>
+  <section id="gallery" class="section-gallery w-full h-auto p-32" ref="secGallery">
+    <h2 class="text-center">Gallery</h2>
 
-    <div class="mt-12 glassmorphism rounded-xl p-10">
+    <div class="mt-12 glassmorphism rounded-xl p-10" :class="{'slide-up': isVisible}">
       <div class="flex px-8 justify-around text-center font-bold">
         <div
             v-for="filter in filters"
@@ -10,77 +10,75 @@
             class="filter-item w-auto h-full"
             :class="{'active-filter': selectedFilter === filter.id}"
         >
-          <button type="button" class="w-auto py-2 px-4" @click="onFilterChange(filter.id)">{{filter.label}}</button>
+          <button type="button" class="w-auto py-2 px-4" @click="onFilterChange(filter.id)">{{ filter.label }}</button>
         </div>
       </div>
 
-      <Gallery :slides="visibleImgArr" />
+      <Gallery :slides="visibleImgArr"/>
 
     </div>
   </section>
 </template>
 
-<script>
+<script setup>
 import {ref, onBeforeMount} from 'vue';
 
 import Gallery from "../sub-components/gallery.vue";
-import TabWrapper from '../sub-components/tab-wrapper.vue';
-import Tab from '../sub-components/tab.vue';
+import Utils from "@/components/utils";
 
-export default {
-  components: {
-    Gallery,
-    TabWrapper,
-    Tab
-  },
-  setup() {
-    const imgArraysByCat = ref({});
-    const visibleImgArr = ref([]);
-    const imgCountByCat = ref({view: 6, outer: 5, livingArea: 6, floors: 6, bed: 8, bath: 3, pantry: 3, kitchen: 1});
+const isVisible = ref(false);
+const secGallery = ref(null);
 
-    const filters = ref([
-      {id: 'all', label: 'All'},
-      {id: 'view', label: 'View'},
-      {id: 'outer', label: 'Outer Area'},
-      {id: 'livingArea', label: 'Living Area'},
-      {id: 'floors', label: 'Floors'},
-      {id: 'bed', label: 'Bedrooms'},
-      {id: 'bath', label: 'Bathrooms'},
-      {id: 'pantry', label: 'Pantry'},
-      {id: 'kitchen', label: 'Kitchen'}
-    ]);
-    const selectedFilter = ref(filters.value[0].id);
+const imgArraysByCat = ref({});
+const visibleImgArr = ref([]);
+const imgCountByCat = ref({view: 6, outer: 5, livingArea: 6, floors: 6, bed: 8, bath: 3, pantry: 3, kitchen: 1});
 
-    onBeforeMount(() => {
-      Object.entries(imgCountByCat.value).forEach(([key, value]) => {
-        let imgName = '';
-        imgArraysByCat.value[key] = [];
+const filters = ref([
+  {id: 'all', label: 'All'},
+  {id: 'view', label: 'View'},
+  {id: 'outer', label: 'Outer Area'},
+  {id: 'livingArea', label: 'Living Area'},
+  {id: 'floors', label: 'Floors'},
+  {id: 'bed', label: 'Bedrooms'},
+  {id: 'bath', label: 'Bathrooms'},
+  {id: 'pantry', label: 'Pantry'},
+  {id: 'kitchen', label: 'Kitchen'}
+]);
+const selectedFilter = ref(filters.value[0].id);
 
-        for (let i = 1; i <= value; i++) {
-          imgName = `gallery/${key.charAt(0).toUpperCase()}${key.slice(1)}_${i}.jpg`;
-          imgArraysByCat.value[key].push(imgName);
-          visibleImgArr.value.push(imgName);
-        }
+onBeforeMount(() => {
+  Object.entries(imgCountByCat.value).forEach(([key, value]) => {
+    let imgName = '';
+    imgArraysByCat.value[key] = [];
 
-        imgArraysByCat.value['all'] = [...visibleImgArr.value];
-      });
-    });
-
-    function onFilterChange(filterId) {
-      selectedFilter.value = filterId;
-      visibleImgArr.value.length = 0;
-
-      imgArraysByCat.value[filterId].forEach((item) => {
-        visibleImgArr.value.push(item);
-      });
+    for (let i = 1; i <= value; i++) {
+      imgName = `gallery/${key.charAt(0).toUpperCase()}${key.slice(1)}_${i}.jpg`;
+      imgArraysByCat.value[key].push(imgName);
+      visibleImgArr.value.push(imgName);
     }
 
-    return {
-      filters,
-      selectedFilter,
-      visibleImgArr,
-      onFilterChange
-    }
+    imgArraysByCat.value['all'] = [...visibleImgArr.value];
+  });
+});
+
+function handleScroll() {
+  if (!isVisible.value) {
+    isVisible.value = Utils.isElementInViewport(secGallery.value);
   }
+
+  return isVisible.value;
 }
+
+function onFilterChange(filterId) {
+  selectedFilter.value = filterId;
+  visibleImgArr.value.length = 0;
+
+  imgArraysByCat.value[filterId].forEach((item) => {
+    visibleImgArr.value.push(item);
+  });
+}
+
+defineExpose({
+  handleScroll
+});
 </script>
