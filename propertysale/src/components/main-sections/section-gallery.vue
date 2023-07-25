@@ -14,20 +14,32 @@
         </div>
       </div>
 
-      <Gallery :slides="visibleImgArr"/>
+      <Gallery :slides="visibleImgArr" :openPopup="openPopup"/>
 
     </div>
+
+    <Popup :open="showPopup" @close="showPopup = false">
+      <img
+          :src="'../src/assets/images/' + selectedSlide"
+          :alt="selectedSlide"
+          class="h-full w-full object-cover rounded"
+      />
+    </Popup>
   </section>
 </template>
 
 <script setup>
 import {ref, onBeforeMount} from 'vue';
 
-import Gallery from "../sub-components/gallery.vue";
-import Utils from "@/components/utils";
+import Utils from '../utils';
+import Gallery from '../sub-components/gallery.vue';
+import Popup from '../sub-components/popup.vue';
 
 const isVisible = ref(false);
 const secGallery = ref(null);
+
+const showPopup = ref(false);
+const selectedSlide = ref(null);
 
 const imgArraysByCat = ref({});
 const visibleImgArr = ref([]);
@@ -76,6 +88,13 @@ function onFilterChange(filterId) {
   imgArraysByCat.value[filterId].forEach((item) => {
     visibleImgArr.value.push(item);
   });
+}
+
+function openPopup(imgIndex) {
+  showPopup.value = true;
+  selectedSlide.value = visibleImgArr.value[imgIndex];
+
+  Utils.onModalStateChanged(true);
 }
 
 defineExpose({

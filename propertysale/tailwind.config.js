@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     extend: {
       zIndex: {
+        '100': '100',
         '200': '200',
       },
       fontFamily: {

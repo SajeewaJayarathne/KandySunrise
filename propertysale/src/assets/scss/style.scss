@@ -16,6 +16,10 @@ html {
 
 body {
   @apply font-main;
+
+  &.modal-open {
+    @apply overflow-hidden;
+  }
 }
 
 h1 {

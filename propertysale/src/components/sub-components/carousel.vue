@@ -82,6 +82,8 @@ export default {
     function openPopup(slideId) {
       isOpen.value = true;
       selectedSlide.value = slides.value[slideId];
+
+      Utils.onModalStateChanged(true);
     }
 
     return {

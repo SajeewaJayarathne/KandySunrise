@@ -4,7 +4,7 @@
         <div class="vue-modal-inner">
           <div class="vue-modal-content">
             <slot/>
-            <button type="button" @click="$emit('close')">
+            <button type="button" @click="close()">
               <IconClose :fill-colour="'#f5fdff'" />
             </button>
           </div>
@@ -15,7 +15,11 @@
 
 <script>
 import { onMounted, onUnmounted } from 'vue';
-import IconClose from "../icons/icon-close.vue";
+
+import Utils from '../utils.js';
+
+import IconClose from '../icons/icon-close.vue';
+
 export default {
   components: {
     IconClose
@@ -29,6 +33,7 @@ export default {
   setup(_, { emit }) {
     const close = () => {
       emit("close");
+      Utils.onModalStateChanged(false);
     };
 
     const handleKeyup = (event) => {

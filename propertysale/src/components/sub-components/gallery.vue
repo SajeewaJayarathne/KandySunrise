@@ -1,11 +1,12 @@
 <template>
   <Carousel id="gallery" class="gallery" :items-to-show="1" :wrap-around="false" v-model="currentSlide">
-    <Slide v-for="slide in slides" :key="slide">
+    <Slide v-for="(slide, index) in slides" :key="index">
       <div class="carousel__item h-[80vh] w-full rounded relative">
         <img
             :src="'../src/assets/images/' + slide"
             :alt="slide"
-            class="h-full w-full object-cover rounded"
+            class="h-full w-full object-cover rounded cursor-pointer"
+            @click="handleImgClick(index)"
         />
       </div>
     </Slide>
@@ -39,12 +40,14 @@
 <script>
 import {ref, toRefs, onMounted} from 'vue'
 import {Carousel, Slide, Navigation} from 'vue3-carousel';
-
 import 'vue3-carousel/dist/carousel.css'
+
+import Popup from '../sub-components/popup.vue';
 
 export default {
   name: 'Gallery',
   components: {
+    Popup,
     Carousel,
     Slide,
     Navigation
@@ -57,10 +60,13 @@ export default {
     thumbnailCount: {
       type: Number,
       default: 5
+    },
+    openPopup: {
+      type: Function
     }
   },
   setup(props) {
-    const {slides, thumbnailCount} = toRefs(props);
+    const {slides, thumbnailCount, openPopup} = toRefs(props);
     const currentSlide = ref(0);
 
     onMounted(() => {
@@ -73,10 +79,17 @@ export default {
       currentSlide.value = val;
     }
 
+    function handleImgClick(index) {
+      if (openPopup.value) {
+        openPopup.value(index);
+      }
+    }
+
     return {
       currentSlide,
       thumbnailCount,
-      slideTo
+      slideTo,
+      handleImgClick
     };
 
   },
