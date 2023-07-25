@@ -1,9 +1,9 @@
 <template>
-  <section id="gallery" class="section-gallery w-full h-auto p-32" ref="secGallery">
+  <section id="gallery" class="section-gallery" ref="secGallery">
     <h2 class="text-center">Gallery</h2>
 
-    <div class="mt-12 glassmorphism rounded-xl p-10" :class="{'slide-up': isVisible}">
-      <div class="flex px-8 justify-around text-center font-bold">
+    <div class="mt-6 lg:mt-12 glassmorphism rounded-xl p-10" :class="{'slide-up': isVisible}">
+      <div class="flex flex-wrap flex-grow-0 flex-shrink-0 px-8 justify-center lg:justify-around text-center font-bold">
         <div
             v-for="filter in filters"
             :key="filter.id"

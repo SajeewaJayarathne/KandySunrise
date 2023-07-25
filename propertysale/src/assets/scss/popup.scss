@@ -2,17 +2,22 @@
 @import "utils";
 
 .vue-modal {
-  @apply fixed top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto bg-primary/90 z-50;
+  @apply fixed top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto bg-primary/90 z-200;
 }
 
 .vue-modal-inner {
-  @apply w-4/5 h-full m-auto flex;
+  @apply w-11/12 md:w-4/5 h-full m-auto flex;
 }
 
 .vue-modal-content {
-  @apply relative bg-clip-padding rounded-md p-14 h-auto max-h-[80%] m-auto glassmorphism text-blue_2 animate zoom;
+  @apply relative bg-clip-padding rounded-md p-4 md:p-14 h-auto max-h-[80%] m-auto glassmorphism text-blue_2 animate zoom;
 
   > button {
-    @apply absolute top-2 right-2;
+    @apply absolute -top-3 -right-3;
   }
+}
+
+/* Customisation */
+.section-gallery .vue-modal-content {
+  @apply h-[80%] p-4;
 }

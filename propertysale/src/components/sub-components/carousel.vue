@@ -1,5 +1,5 @@
 <template>
-  <Carousel :items-to-show="slidesToShow" :wrap-around="true" :transition="500">
+  <Carousel :items-to-show="slidesToShow" :wrap-around="true" :transition="500" :breakpoints="breakpoints">
     <Slide v-for="slide in slides" :key="slide.id">
       <div class="carousel__item h-96 w-full rounded relative cursor-pointer" @click="openPopup(slide.id)">
         <img
@@ -41,9 +41,10 @@ import {ref} from 'vue';
 import 'vue3-carousel/dist/carousel.css';
 import {Carousel, Slide, Pagination, Navigation} from 'vue3-carousel';
 
-import Popup from "../sub-components/popup.vue";
-import IconPrev from "../icons/icon-prev.vue";
-import IconNext from "../icons/icon-next.vue";
+import Utils from '../utils';
+import Popup from '../sub-components/popup.vue';
+import IconPrev from '../icons/icon-prev.vue';
+import IconNext from '../icons/icon-next.vue';
 
 export default {
   components: {
@@ -67,6 +68,10 @@ export default {
     slideMargin: {
       type: String,
       default: '5'
+    },
+    breakpoints: {
+      type: Object,
+      default: {}
     }
   },
   setup(props) {

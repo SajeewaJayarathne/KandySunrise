@@ -21,7 +21,7 @@
       :wrap-around="false"
       v-model="currentSlide"
       ref="carousel"
-      class="gallery-thumbnails"
+      class="gallery-thumbnails hidden lg:block"
   >
     <Slide v-for="(slide, index) in slides" :key="index">
       <div class="carousel__item" @click="slideTo(index)">

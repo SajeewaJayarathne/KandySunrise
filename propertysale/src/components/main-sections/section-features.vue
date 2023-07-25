@@ -1,17 +1,17 @@
 <template>
-  <section id="features" class="section-features w-full h-auto p-32" ref="secFeatures">
-    <h2>Property Features</h2>
-    <div class="grid grid-cols-2 grid-rows-1 gap-x-20 mt-12 max-h-[70vh] h-[70vh]">
-      <div class="col-start-1 row-start-1 rounded" :class="{'slide-right': isVisible}">
-        <img class="h-full object-cover aspect-square brightness-110 rounded transition"
+  <section id="features" class="section-features" ref="secFeatures">
+    <h2 class="text-center lg:text-left">Property Features</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20 mt-6 lg:mt-12 lg:max-h-[70vh] lg:h-[70vh]">
+      <div class="col-start-1 row-start-2 lg:row-start-1 rounded" :class="{'slide-right': isVisible}">
+        <img class="h-[60vh] w-full lg:h-full object-cover aspect-square brightness-110 rounded transition"
              :src="'../src/assets/images/' + selectedImg.imgName"
              :alt="selectedImg.alt"
         />
       </div>
 
-      <div class="col-start-2 row-start-1" :class="{'slide-left': isVisible}">
+      <div class="col-start-1 lg:col-start-2 row-start-1" :class="{'slide-left': isVisible}">
         <TabWrapper :onClickTab="onClickTab">
-          <Tab :title="'Floor Details'" :tabId="0">
+          <Tab :title="'Floors'" :tabId="0">
             <div class="mt-8">
               <h6>4th floor</h6>
               <p>Master bedroom with a large balcony facing the mountain view.</p>
@@ -25,7 +25,7 @@
             </div>
           </Tab>
 
-          <Tab :title="'Bedroom Details'" :tabId="1">
+          <Tab :title="'Bedrooms'" :tabId="1">
             <div class="mt-8">
               <h6>Bathrooms</h6>
               <p>All bedrooms are quite large with attached bathrooms (excluding 1 bedroom).</p>
@@ -34,7 +34,7 @@
             </div>
           </Tab>
 
-          <Tab :title="'Property Details'" :tabId="2">
+          <Tab :title="'Property'" :tabId="2">
             <div class="mt-8">
               <h6>Security</h6>
               <p>CCTV cameras installed even though it is an extremely peaceful suburb.</p>
@@ -60,9 +60,9 @@ const isVisible = ref(false);
 const secFeatures = ref(null);
 
 const imagesArr = ref([
-  {imgName: 'Hero_2.jpg', alt: 'Floor Details'},
-  {imgName: 'Hero_3.jpg', alt: 'Bedroom Details'},
-  {imgName: 'Hero_2.jpg', alt: 'Property Details'}
+  {imgName: 'gallery/Floors_6.jpg', alt: 'Floor Details'},
+  {imgName: 'gallery/Bed_2.jpg', alt: 'Bedroom Details'},
+  {imgName: 'gallery/LivingArea_1.jpg', alt: 'Property Details'}
 ]);
 
 const selectedImg = ref(imagesArr.value[0]);

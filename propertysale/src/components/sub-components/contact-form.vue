@@ -28,7 +28,7 @@
         <IconReject v-else class="mr-4 my-auto" />
         {{submitMessage.title}}
       </h3>
-      <p class="mt-12 text-lg">{{submitMessage.body}}</p>
+      <p class="mt-6 lg:mt-12 text-lg">{{submitMessage.body}}</p>
     </div>
   </Popup>
 </template>

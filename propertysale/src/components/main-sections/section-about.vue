@@ -1,15 +1,15 @@
 <template>
-  <section id="about" class="section-about w-full h-auto p-32" ref="secAbout">
-    <div class="grid grid-cols-2 grid-rows-1 gap-x-20">
-      <div class="col-start-1 row-start-1" :class="{'slide-right': isVisible}">
-        <h2>A Sanctuary of<br>Luxury & Serenity</h2>
+  <section id="about" class="section-about" ref="secAbout">
+    <div class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20">
+      <div class="text-center lg:text-left" :class="{'slide-right': isVisible}">
+        <h2>A Sanctuary of Luxury & Serenity</h2>
         <p class="my-7">Experience the epitome of luxury living near Kandy with this exquisite house for sale. Located
           just 3km from
           the City, it offers convenience and serenity.</p>
 
         <TabWrapper>
-          <Tab :title="'Living Spaces'" :tabId="0">
-            <div class="features pt-4 grid grid-cols-2">
+          <Tab :title="'Living'" :tabId="0">
+            <div class="features">
               <div id="floors">
                 <svg fill="#000000" width="50" height="50" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><path d="M425.567,28.444c-5.236,0-8.382,4.161-8.382,9.397v85.418h-67.002c-5.236,0-8.85,4.633-8.85,9.869v75.464h-76.951 c-5.236,0-8.382,4.105-8.382,9.341v75.992h-76.428c-5.236,0-8.905,4.165-8.905,9.402v75.932H93.715 c-5.236,0-8.382,4.633-8.382,9.869v75.464H0v18.963h93.715c5.236,0,10.581-3.858,10.581-9.094v-76.24h75.275 c5.236,0,10.058-3.858,10.058-9.094v-76.24h74.752c5.236,0,10.581-4.325,10.581-9.561v-75.772h75.22 c5.236,0,10.113-4.385,10.113-9.622v-75.712h65.271c5.236,0,10.581-3.858,10.581-9.094V47.407H512V28.444H425.567z"></path>
@@ -97,8 +97,8 @@
             </div>
           </Tab>
 
-          <Tab :title="'Functional Spaces'" :tabId="1">
-            <div class="features pt-4 grid grid-cols-2">
+          <Tab :title="'Functional'" :tabId="1">
+            <div class="features">
               <div id="kitchens">
                 <svg fill="#000000" width="50" height="50" viewBox="0 -5.59 122.88 122.88" version="1.1" id="Layer_1"
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -118,8 +118,8 @@
             </div>
           </Tab>
 
-          <Tab :title="'Auxiliary Spaces'" :tabId="2">
-            <div class="features pt-4 grid grid-cols-2">
+          <Tab :title="'Auxiliary'" :tabId="2">
+            <div class="features">
               <div id="parking">
                 <svg width="50" height="50" viewBox="0 0 48 48" id="a" xmlns="http://www.w3.org/2000/svg"
                      fill="#000000">
@@ -150,8 +150,8 @@
             </div>
           </Tab>
 
-          <Tab :title="'Property Specifications'" :tabId="3">
-            <div class="features pt-4 grid grid-cols-2">
+          <Tab :title="'Property'" :tabId="3">
+            <div class="features">
               <div id="floor-area">
                 <svg viewBox="0 0 24 24" width="50" height="50" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                   <path
@@ -177,11 +177,11 @@
         </TabWrapper>
       </div>
 
-      <div class="col-start-2 row-start-1 rounded" :class="{'slide-left': isVisible}">
+      <div class="rounded" :class="{'slide-left': isVisible}">
         <img
             src="../../assets/images/Staircase.jpg"
             alt="Staircase"
-            class="h-auto object-cover aspect-square brightness-110 rounded"
+            class="h-[80vh] w-full lg:h-full object-cover aspect-square brightness-110 rounded"
         />
       </div>
     </div>
