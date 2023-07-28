@@ -103,3 +103,12 @@
 .hero-content-animation {
   animation: fade-in 0.75s 1.5s linear forwards;
 }
+
+/* Spin */
+.spin {
+  animation: spinner 2s linear infinite;
+}
+@keyframes spinner {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}

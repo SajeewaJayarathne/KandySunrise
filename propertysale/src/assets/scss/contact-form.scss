@@ -6,8 +6,8 @@ form.contact-form {
   > div {
     @apply mb-6 w-full flex;
 
-    > input, > textarea {
-      @apply w-full p-2 pb-1 bg-transparent border-b-2 border-blue_1 text-blue_2;
+    > div {
+      @apply block;
 
       &:first-child {
         @apply mr-1;
@@ -18,19 +18,27 @@ form.contact-form {
       }
 
       &:only-child {
-        @apply mx-0;
+        @apply mx-0 w-full;
       }
 
-      &:focus-visible {
-        @apply outline-1 outline-tertiary;
+      label {
+        @apply text-blue_2/70;
       }
 
-      &::placeholder {
-        @apply text-gray-200;
+      input, textarea {
+        @apply w-full p-2 pb-1 bg-transparent border-b-2 border-blue_1 text-blue_2;
+
+        &:focus-visible {
+          @apply outline-0 bg-tertiary/50;
+        }
+
+        &::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+        }
       }
 
-      &::-webkit-calendar-picker-indicator {
-        filter: invert(1);
+      input {
+        @apply h-10;
       }
     }
   }

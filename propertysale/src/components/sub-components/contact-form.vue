@@ -1,19 +1,38 @@
 <template>
   <form class="contact-form" @submit.prevent="submitForm">
     <div>
-      <input type="text" name="name" placeholder="Name" v-model="name" required/>
-      <input type="email" name="email" placeholder="Email" v-model="email" required/>
+      <div>
+        <label class="required">Name</label>
+        <input type="text" name="name" v-model="name" required/>
+      </div>
+      <div>
+        <label class="required">Email</label>
+        <input type="email" name="email" v-model="email" required/>
+      </div>
     </div>
     <div>
-      <input type="text" name="phone" placeholder="Phone #" v-model="phone" required/>
-      <input type="date" name="reqDate" placeholder="Requested Date" v-model="reqDate" :min="minDate"/>
+      <div>
+        <label class="required">Phone</label>
+        <input type="text" name="phone" v-model="phone" required/>
+      </div>
+      <div>
+        <label class="required">Requested Date</label>
+        <input type="date" name="reqDate" required v-model="reqDate" :min="minDate"/>
+      </div>
     </div>
     <div>
-      <textarea name="message" placeholder="Other Requests" v-model="message"></textarea>
+      <div>
+        <label>Other Requests</label>
+        <textarea name="message" v-model="message"></textarea>
+      </div>
     </div>
 
     <div class="items-center justify-between">
-      <button type="submit" class="button-secondary">Send Message</button>
+      <button v-if="inProgress" class="button-secondary !py-3 cursor-not-allowed" :style="{width: `${btnWidth}px`}" disabled>
+        <div class="loader"></div>
+      </button>
+      <button v-else type="submit" class="button-secondary" ref="submitBtn">Send Message</button>
+
       <span v-if="isMobileAvailable" class="text-right">Or call on:
         <br>
         <a :href="'tel:' + mobileNumber" class="underline underline-offset-4">{{ mobileNumber }}</a>
@@ -24,22 +43,22 @@
   <Popup :open="showSubmitMessage" @close="showSubmitMessage = false">
     <div v-if="submitMessage != null" class="h-full">
       <h3 class="text-center flex justify-center">
-        <IconSuccess v-if="submitMessage.type === 1" class="mr-4 my-auto" />
-        <IconReject v-else class="mr-4 my-auto" />
-        {{submitMessage.title}}
+        <IconSuccess v-if="submitMessage.type === 1" class="mr-4 my-auto"/>
+        <IconReject v-else class="mr-4 my-auto"/>
+        {{ submitMessage.title }}
       </h3>
-      <p class="mt-6 lg:mt-12 text-lg">{{submitMessage.body}}</p>
+      <p class="mt-6 lg:mt-12 text-lg">{{ submitMessage.body }}</p>
     </div>
   </Popup>
 </template>
 
 <script setup>
-import {ref, onBeforeMount} from 'vue';
+import {ref, onBeforeMount, onMounted} from 'vue';
 import {defineProps} from '@vue/runtime-core';
 
-import Popup from "../sub-components/popup.vue";
-import IconSuccess from "../icons/icon-success.vue";
-import IconReject from "../icons/icon-reject.vue";
+import Popup from '../sub-components/popup.vue';
+import IconSuccess from '../icons/icon-success.vue';
+import IconReject from '../icons/icon-reject.vue';
 
 defineProps(['isMobileAvailable', 'mobileNumber']);
 
@@ -52,11 +71,17 @@ const reqDate = ref("");
 const message = ref("");
 
 const minDate = ref(null);
-const showSubmitMessage = ref(false);
+const btnWidth = ref(0);
+const submitBtn = ref(null);
 const submitMessage = ref(null);
+const showSubmitMessage = ref(false);
 
-onBeforeMount(() => {
-  _setDefaultDate();
+const inProgress = ref(false);
+
+onBeforeMount(() => _setDefaultDate());
+
+onMounted(() => {
+  btnWidth.value = submitBtn.value?.getBoundingClientRect()?.width;
 });
 
 function _setDefaultDate() {
@@ -88,6 +113,8 @@ function _showSubmitMessage(result) {
 }
 
 const submitForm = async () => {
+  inProgress.value = true;
+
   const response = await fetch('https://api.web3forms.com/submit', {
     method: "POST",
     headers: {
@@ -107,6 +134,8 @@ const submitForm = async () => {
   const result = await response.json();
 
   if (result) {
+    inProgress.value = false;
+
     name.value = '';
     email.value = '';
     phone.value = '';

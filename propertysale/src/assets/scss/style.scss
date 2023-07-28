@@ -60,6 +60,10 @@ h6 {
   &:hover {
     @apply bg-primary;
   }
+
+  &:disabled:hover {
+    @apply bg-secondary;
+  }
 }
 
 .button-secondary {
@@ -68,4 +72,17 @@ h6 {
   &:hover {
     @apply bg-blue_2 text-blue_1;
   }
+
+  &:disabled:hover {
+    @apply bg-blue_1 text-white;
+  }
+}
+
+.loader {
+  @apply m-auto border-4 border-blue_2 rounded-full border-t-transparent w-8 h-8 spin;
+}
+
+.required:before {
+  content:"* ";
+  @apply text-primary;
 }
