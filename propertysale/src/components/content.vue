@@ -9,6 +9,10 @@
     </nav>
   </header>
 
+  <section class="section-audio">
+    <AudioPlayer/>
+  </section>
+
   <section class="main-content">
     <SectionHero/>
     <SectionAbout ref="sectionAboutRef" />

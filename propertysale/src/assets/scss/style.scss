@@ -86,3 +86,7 @@ h6 {
   content:"* ";
   @apply text-primary;
 }
+
+.section-audio {
+  @apply z-150 fixed right-0 top-0 p-4;
+}

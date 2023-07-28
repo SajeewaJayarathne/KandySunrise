@@ -21,7 +21,6 @@
       @apply self-center;
     }
 
-    // Images
     &-image {
       @apply grid fixed z-0 grid-cols-[1fr] grid-rows-[1fr] place-items-center animate fade-in;
 

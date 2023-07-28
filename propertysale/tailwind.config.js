@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       zIndex: {
         '100': '100',
+        '150': '150',
         '200': '200',
       },
       fontFamily: {
