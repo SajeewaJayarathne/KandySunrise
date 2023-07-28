@@ -1,6 +1,16 @@
 <template>
-  <h2>Property Highlights</h2>
-  <div class="mt-6 lg:mt-12">
+  <h2
+    class="text-center"
+    data-aos="fade-up"
+    data-aos-duration="1000"
+  >
+    Property Highlights
+  </h2>
+  <div
+    class="mt-6 lg:mt-12"
+    data-aos="fade-in"
+    data-aos-duration="1000"
+  >
     <Carousel
         :slides="slides"
         :slides-to-show="1"

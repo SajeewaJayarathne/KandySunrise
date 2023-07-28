@@ -1,6 +1,10 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20">
-    <div class="text-center lg:text-left" :class="{'slide-right': activeMenuId === menuId && isScrollingDown}">
+    <div
+      class="text-center lg:text-left"
+      data-aos="fade-right"
+      data-aos-duration="1500"
+    >
       <h2>A Sanctuary of Luxury & Serenity</h2>
       <p class="my-7">Experience the epitome of luxury living near Kandy with this exquisite house for sale. Located
         just 3km from
@@ -176,7 +180,11 @@
       </TabWrapper>
     </div>
 
-    <div class="rounded" :class="{'slide-left': activeMenuId === menuId && isScrollingDown}">
+    <div
+      class="rounded"
+      data-aos="fade-left"
+      data-aos-duration="1500"
+    >
       <img
           src="../../assets/images/Staircase.jpg"
           alt="Staircase"
@@ -187,10 +195,6 @@
 </template>
 
 <script setup>
-import {defineProps} from '@vue/runtime-core';
-
 import TabWrapper from '../sub-components/tab-wrapper.vue';
 import Tab from '../sub-components/tab.vue';
-
-defineProps(['activeMenuId', 'menuId', 'isScrollingDown']);
 </script>

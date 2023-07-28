@@ -1,7 +1,17 @@
 <template>
-  <h2 class="text-center">Gallery</h2>
+  <h2
+    class="text-center"
+    data-aos="fade-up"
+    data-aos-duration="1000"
+  >
+    Gallery
+  </h2>
 
-  <div class="mt-6 lg:mt-12 glassmorphism rounded-xl p-4 lg:p-10" :class="{'slide-up': activeMenuId === menuId && isScrollingDown}">
+  <div
+    class="mt-6 lg:mt-12 glassmorphism rounded-xl p-4 lg:p-10"
+    data-aos="fade-in"
+    data-aos-duration="1000"
+  >
     <div class="flex flex-wrap flex-grow-0 flex-shrink-0 px-8 justify-center lg:justify-around text-center font-bold">
       <div
           v-for="filter in filters"
@@ -28,13 +38,10 @@
 
 <script setup>
 import {ref, onBeforeMount} from 'vue';
-import {defineProps} from '@vue/runtime-core';
 
 import Utils from '../utils';
 import Gallery from '../sub-components/gallery.vue';
 import Popup from '../sub-components/popup.vue';
-
-defineProps(['activeMenuId', 'menuId', 'isScrollingDown']);
 
 const showPopup = ref(false);
 const selectedSlide = ref(null);

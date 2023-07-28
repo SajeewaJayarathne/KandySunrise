@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/runtime-core": "^3.3.4",
+    "aos": "^2.3.4",
     "vue": "^3.3.4",
     "vue3-carousel": "^0.3.1"
   },

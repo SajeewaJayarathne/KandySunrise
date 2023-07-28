@@ -1,15 +1,29 @@
 <template>
-  <h2 class="text-center lg:text-left">Property Features</h2>
+  <h2
+    class="text-center lg:text-left"
+    data-aos="fade-up"
+    data-aos-duration="1000"
+  >
+    Property Features
+  </h2>
   <div
       class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20 mt-6 lg:mt-12 lg:max-h-[70vh] lg:h-[70vh]">
-    <div class="col-start-1 row-start-2 lg:row-start-1 rounded" :class="{'slide-right': activeMenuId === menuId && isScrollingDown}">
+    <div
+      class="col-start-1 row-start-2 lg:row-start-1 rounded"
+      data-aos="fade-right"
+      data-aos-duration="1500"
+    >
       <img class="h-[60vh] w-full lg:h-full object-cover aspect-square brightness-110 rounded transition"
            :src="'../src/assets/images/' + selectedImg.imgName"
            :alt="selectedImg.alt"
       />
     </div>
 
-    <div class="col-start-1 lg:col-start-2 row-start-1" :class="{'slide-left': activeMenuId === menuId && isScrollingDown}">
+    <div
+      class="col-start-1 lg:col-start-2 row-start-1"
+      data-aos="fade-left"
+      data-aos-duration="1500"
+    >
       <TabWrapper :onClickTab="onClickTab">
         <Tab :title="'Floors'" :tabId="0">
           <div class="mt-8">
@@ -52,9 +66,6 @@ import {ref} from 'vue';
 
 import TabWrapper from '../sub-components/tab-wrapper.vue';
 import Tab from '../sub-components/tab.vue';
-import {defineProps} from '@vue/runtime-core';
-
-defineProps(['activeMenuId', 'menuId', 'isScrollingDown']);
 
 const imagesArr = ref([
   {imgName: 'gallery/Floors_6.jpg', alt: 'Floor Details'},

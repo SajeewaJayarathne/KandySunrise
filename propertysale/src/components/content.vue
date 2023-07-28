@@ -23,7 +23,7 @@
     </section>
 
     <section id="about" class="section-about" ref="sectionAboutRef">
-      <SectionAbout :activeMenuId="activeMenuId" :menuId="'about'" :isScrollingDown="isScrollingDown"/>
+      <SectionAbout />
     </section>
 
     <section id="highlights" class="section-highlights text-center" ref="sectionHighlightsRef">
@@ -31,16 +31,20 @@
     </section>
 
     <section id="features" class="section-features" ref="sectionFeaturesRef">
-      <SectionFeatures :activeMenuId="activeMenuId" :menuId="'features'" :isScrollingDown="isScrollingDown"/>
+      <SectionFeatures />
     </section>
 
     <section id="gallery" class="section-gallery" ref="sectionGalleryRef">
-      <SectionGallery :activeMenuId="activeMenuId" :menuId="'gallery'" :isScrollingDown="isScrollingDown"/>
+      <SectionGallery />
     </section>
 
     <section id="schedule" class="section-schedule" ref="sectionScheduleRef">
       <div class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20">
-        <div class="col-start-1 row-start-2 lg:row-start-1">
+        <div
+          class="col-start-1 row-start-2 lg:row-start-1"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
           <div class="w-full h-[40vh] lg:h-full">
             <iframe class="shadow-xl"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.31490788903!2d80.64089057482778!3d7.318478913415308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae367dd53e751bd%3A0x62e9afb02efd878c!2s16%20Dharshana%20Mawatha%2C%20Kandy%2020000%2C%20Sri%20Lanka!5e0!3m2!1sen!2sau!4v1689594126021!5m2!1sen!2sau"
@@ -49,7 +53,10 @@
           </div>
         </div>
 
-        <div>
+        <div
+          data-aos="fade-left"
+          data-aos-duration="1000"
+        >
           <h3 class="text-center lg:text-left">Schedule a Visit</h3>
           <div class="mt-6 md:mt-12 mx-auto">
             <ContactForm
@@ -121,11 +128,9 @@ const sectionFeaturesRef = ref();
 const sectionGalleryRef = ref();
 const sectionScheduleRef = ref();
 
-const isScrollingDown = ref(false);
 const mobileNavOpen = ref(false);
 const activeMenuId = ref(navItems.value[0].id);
 
-let oldScrollY = window.scrollY;
 let sectionTop, sectionId;
 
 onBeforeMount(() => {
@@ -147,14 +152,11 @@ const handleScroll = () => {
     if (!view.value.topOfPage) view.value.topOfPage = true;
   }
 
-  isScrollingDown.value = oldScrollY < window.scrollY;
-  oldScrollY = window.scrollY;
-
   sections.forEach(section => {
     sectionTop = section.value.offsetTop;
     sectionId = section.value.getAttribute('id');
 
-    if (pageYOffset + (screen.height * 0.9) >= sectionTop && activeMenuId.value !== sectionId) {
+    if (pageYOffset >= sectionTop && activeMenuId.value !== sectionId) {
       activeMenuId.value = sectionId;
     }
   });

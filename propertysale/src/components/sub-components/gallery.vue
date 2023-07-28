@@ -1,7 +1,7 @@
 <template>
   <Carousel id="gallery" class="gallery" :items-to-show="1" :wrap-around="false" v-model="currentSlide">
     <Slide v-for="(slide, index) in slides" :key="index">
-      <div class="carousel__item h-[80vh] w-full rounded relative">
+      <div class="carousel__item h-[50vh] lg:h-[80vh] w-full rounded relative">
         <img
             :src="'../src/assets/images/' + slide"
             :alt="slide"
