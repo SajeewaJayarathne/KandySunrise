@@ -2,7 +2,11 @@
   <header>
     <nav :class="{ 'onScroll': !view.topOfPage}">
       <ul class="navmenu">
-        <li v-for="item in navItems" class="item">
+        <li
+            v-for="item in navItems"
+            class="item"
+            :class="activeMenuId === item.id ? 'menu_active' : ''"
+        >
           <a :href="'#' + item.id">{{ item.label }}</a>
         </li>
       </ul>
@@ -14,17 +18,34 @@
   </section>
 
   <section class="main-content">
-    <SectionHero/>
-    <SectionAbout ref="sectionAboutRef" />
-    <SectionHighlights/>
-    <SectionFeatures ref="sectionFeaturesRef" />
-    <SectionGallery ref="sectionGalleryRef" />
+    <section id="home" class="hero" ref="sectionHomeRef">
+      <SectionHero/>
+    </section>
 
-    <section id="schedule" class="section-schedule">
+    <section id="about" class="section-about" ref="sectionAboutRef">
+      <SectionAbout :activeMenuId="activeMenuId" :menuId="'about'" :isScrollingDown="isScrollingDown"/>
+    </section>
+
+    <section id="highlights" class="section-highlights text-center" ref="sectionHighlightsRef">
+      <SectionHighlights/>
+    </section>
+
+    <section id="features" class="section-features" ref="sectionFeaturesRef">
+      <SectionFeatures :activeMenuId="activeMenuId" :menuId="'features'" :isScrollingDown="isScrollingDown"/>
+    </section>
+
+    <section id="gallery" class="section-gallery" ref="sectionGalleryRef">
+      <SectionGallery :activeMenuId="activeMenuId" :menuId="'gallery'" :isScrollingDown="isScrollingDown"/>
+    </section>
+
+    <section id="schedule" class="section-schedule" ref="sectionScheduleRef">
       <div class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20">
         <div class="col-start-1 row-start-2 lg:row-start-1">
           <div class="w-full h-[40vh] lg:h-full">
-            <iframe class="shadow-xl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.31490788903!2d80.64089057482778!3d7.318478913415308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae367dd53e751bd%3A0x62e9afb02efd878c!2s16%20Dharshana%20Mawatha%2C%20Kandy%2020000%2C%20Sri%20Lanka!5e0!3m2!1sen!2sau!4v1689594126021!5m2!1sen!2sau" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe class="shadow-xl"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.31490788903!2d80.64089057482778!3d7.318478913415308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae367dd53e751bd%3A0x62e9afb02efd878c!2s16%20Dharshana%20Mawatha%2C%20Kandy%2020000%2C%20Sri%20Lanka!5e0!3m2!1sen!2sau!4v1689594126021!5m2!1sen!2sau"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
 
@@ -42,24 +63,45 @@
   </section>
 
   <section class="side-nav">
+    <div class="nav-container" :class="{open: mobileNavOpen}">
 
+      <button type="button" class="close-button" @click="closeNav()">
+        <IconClose :fill-colour="'#f5fdff'"/>
+      </button>
+
+      <ul class="navmenu">
+        <li
+            v-for="item in navItems"
+            class="item"
+            :class="activeMenuId === item.id ? 'menu_active' : ''"
+        >
+          <a :href="'#' + item.id" @click="closeNav()">{{ item.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <button v-show="!mobileNavOpen" class="p-4" @click="openNav()">
+      <IconMenu/>
+    </button>
   </section>
-
-  <footer>
-
-  </footer>
 </template>
 
 <script setup>
-import {ref, onBeforeMount, onUnmounted} from 'vue';
+import {ref, onBeforeMount, onMounted, onUnmounted} from 'vue';
+import Utils from './utils';
 
 /* Sections */
-import SectionHero from "./main-sections/section-hero.vue";
-import SectionAbout from "./main-sections/section-about.vue";
-import SectionHighlights from "./main-sections/section-highlights.vue";
-import SectionFeatures from "./main-sections/section-features.vue";
-import SectionGallery from "./main-sections/section-gallery.vue";
-import ContactForm from "./sub-components/contact-form.vue";
+import SectionHero from './main-sections/section-hero.vue';
+import SectionAbout from './main-sections/section-about.vue';
+import SectionHighlights from './main-sections/section-highlights.vue';
+import SectionFeatures from './main-sections/section-features.vue';
+import SectionGallery from './main-sections/section-gallery.vue';
+
+import ContactForm from './sub-components/contact-form.vue';
+import AudioPlayer from './sub-components/audio-player.vue';
+
+import IconClose from './icons/icon-close.vue';
+import IconMenu from './icons/icon-menu.vue';
 
 const view = ref({topOfPage: true});
 const navItems = ref([
@@ -71,18 +113,27 @@ const navItems = ref([
   {id: 'schedule', label: 'Schedule a Visit'}
 ]);
 
+const sections = [];
+const sectionHomeRef = ref();
 const sectionAboutRef = ref();
+const sectionHighlightsRef = ref();
 const sectionFeaturesRef = ref();
 const sectionGalleryRef = ref();
+const sectionScheduleRef = ref();
 
-let stateChanged = {
-  sectionAbout: false,
-  sectionFeatures: false,
-  sectionGallery: false
-}
+const isScrollingDown = ref(false);
+const mobileNavOpen = ref(false);
+const activeMenuId = ref(navItems.value[0].id);
+
+let oldScrollY = window.scrollY;
+let sectionTop, sectionId;
 
 onBeforeMount(() => {
   window.addEventListener('scroll', handleScroll);
+});
+
+onMounted(() => {
+  sections.push(sectionHomeRef, sectionAboutRef, sectionHighlightsRef, sectionFeaturesRef, sectionGalleryRef, sectionScheduleRef);
 });
 
 onUnmounted(() => {
@@ -96,16 +147,26 @@ const handleScroll = () => {
     if (!view.value.topOfPage) view.value.topOfPage = true;
   }
 
-  if (sectionAboutRef.value && !stateChanged.sectionAbout) {
-    stateChanged.sectionAbout = sectionAboutRef.value.handleScroll();
-  }
+  isScrollingDown.value = oldScrollY < window.scrollY;
+  oldScrollY = window.scrollY;
 
-  if (sectionFeaturesRef.value && !stateChanged.sectionFeatures) {
-    stateChanged.sectionFeatures = sectionFeaturesRef.value.handleScroll();
-  }
+  sections.forEach(section => {
+    sectionTop = section.value.offsetTop;
+    sectionId = section.value.getAttribute('id');
 
-  if (sectionGalleryRef.value && !stateChanged.sectionGallery) {
-    stateChanged.sectionGallery = sectionGalleryRef.value.handleScroll();
-  }
+    if (pageYOffset + (screen.height * 0.9) >= sectionTop && activeMenuId.value !== sectionId) {
+      activeMenuId.value = sectionId;
+    }
+  });
 };
+
+function openNav() {
+  mobileNavOpen.value = true;
+  Utils.onModalStateChanged(true);
+}
+
+function closeNav() {
+  mobileNavOpen.value = false;
+  Utils.onModalStateChanged(false);
+}
 </script>

@@ -1,35 +1,66 @@
-@layer {
-  header {
-    @apply overflow-hidden fixed left-0 top-0 w-full z-100 bg-transparent text-white;
+@import 'animations';
+
+header {
+  @apply hidden md:block overflow-hidden fixed left-0 top-0 w-full z-100 bg-transparent text-white;
+}
+
+nav {
+  @apply py-8;
+  transition: all .5s ease-in-out 0s;
+
+  .navmenu {
+    @apply list-none flex flex-wrap justify-between md:justify-center items-center lg:items-end lg:flex-nowrap lg:bg-none;
+
+    > li.item {
+      @apply lg:order-1 lg:relative lg:block lg:w-auto transition border-b-2 border-b-transparent;
+
+      &.menu_active {
+        @apply border-b-2 border-b-primary;
+      }
+
+      > a {
+        @apply block py-4 px-6 cursor-pointer transition font-bold;
+
+        &:hover {
+          @apply bg-tertiary;
+        }
+      }
+    }
   }
 
-  nav {
-    @apply py-8;
-    transition: all .5s ease-in-out 0s;
+  &.onScroll {
+    @apply shadow-xl bg-white/90 py-1;
 
-    .navmenu {
-      @apply list-none flex flex-wrap justify-between md:justify-center items-center lg:items-end lg:flex-nowrap lg:bg-none;
+    ul.navmenu li {
+      @apply text-black;
+    }
+  }
+}
 
-      > li.item {
-        @apply lg:order-1 lg:relative lg:block lg:w-auto transition;
+.side-nav {
+  @apply z-200 block md:hidden fixed left-0 top-0;
 
-        > a {
-          @apply block py-4 px-6 cursor-pointer transition font-bold;
+  .nav-container {
+    @apply h-full w-0 fixed left-0 top-0 overflow-x-hidden bg-primary/90 duration-700;
 
-          &:hover {
-            @apply bg-tertiary;
-          }
+    &.open {
+      @apply w-full;
+    }
+
+    ul.navmenu {
+      @apply relative w-full text-center my-14 px-[20%];
+
+      > li {
+        @apply p-3 text-blue_2 block transition text-xl border-b-2 border-b-transparent;
+
+        &.menu_active {
+          @apply border-b-2 border-b-secondary;
         }
       }
     }
 
-    &.onScroll {
-      @apply shadow-xl bg-white/90 py-1;
-
-      ul.navmenu li {
-        @apply text-black;
-      }
+    .close-button {
+      @apply absolute top-1 right-1;
     }
   }
-
 }

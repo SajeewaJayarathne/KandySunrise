@@ -1,42 +1,40 @@
 <template>
-  <section id="gallery" class="section-gallery" ref="secGallery">
-    <h2 class="text-center">Gallery</h2>
+  <h2 class="text-center">Gallery</h2>
 
-    <div class="mt-6 lg:mt-12 glassmorphism rounded-xl p-10" :class="{'slide-up': isVisible}">
-      <div class="flex flex-wrap flex-grow-0 flex-shrink-0 px-8 justify-center lg:justify-around text-center font-bold">
-        <div
-            v-for="filter in filters"
-            :key="filter.id"
-            class="filter-item w-auto h-full"
-            :class="{'active-filter': selectedFilter === filter.id}"
-        >
-          <button type="button" class="w-auto py-2 px-4" @click="onFilterChange(filter.id)">{{ filter.label }}</button>
-        </div>
+  <div class="mt-6 lg:mt-12 glassmorphism rounded-xl p-4 lg:p-10" :class="{'slide-up': activeMenuId === menuId && isScrollingDown}">
+    <div class="flex flex-wrap flex-grow-0 flex-shrink-0 px-8 justify-center lg:justify-around text-center font-bold">
+      <div
+          v-for="filter in filters"
+          :key="filter.id"
+          class="filter-item w-auto h-full"
+          :class="{'active-filter': selectedFilter === filter.id}"
+      >
+        <button type="button" class="w-auto py-2 px-4" @click="onFilterChange(filter.id)">{{ filter.label }}</button>
       </div>
-
-      <Gallery :slides="visibleImgArr" :openPopup="openPopup"/>
-
     </div>
 
-    <Popup :open="showPopup" @close="showPopup = false">
-      <img
-          :src="'../src/assets/images/' + selectedSlide"
-          :alt="selectedSlide"
-          class="h-full w-full object-cover rounded"
-      />
-    </Popup>
-  </section>
+    <Gallery :slides="visibleImgArr" :openPopup="openPopup"/>
+
+  </div>
+
+  <Popup :open="showPopup" @close="showPopup = false">
+    <img
+        :src="'../src/assets/images/' + selectedSlide"
+        :alt="selectedSlide"
+        class="h-full w-full object-cover rounded"
+    />
+  </Popup>
 </template>
 
 <script setup>
 import {ref, onBeforeMount} from 'vue';
+import {defineProps} from '@vue/runtime-core';
 
 import Utils from '../utils';
 import Gallery from '../sub-components/gallery.vue';
 import Popup from '../sub-components/popup.vue';
 
-const isVisible = ref(false);
-const secGallery = ref(null);
+defineProps(['activeMenuId', 'menuId', 'isScrollingDown']);
 
 const showPopup = ref(false);
 const selectedSlide = ref(null);
@@ -73,14 +71,6 @@ onBeforeMount(() => {
   });
 });
 
-function handleScroll() {
-  if (!isVisible.value) {
-    isVisible.value = Utils.isElementInViewport(secGallery.value);
-  }
-
-  return isVisible.value;
-}
-
 function onFilterChange(filterId) {
   selectedFilter.value = filterId;
   visibleImgArr.value.length = 0;
@@ -96,8 +86,4 @@ function openPopup(imgIndex) {
 
   Utils.onModalStateChanged(true);
 }
-
-defineExpose({
-  handleScroll
-});
 </script>
