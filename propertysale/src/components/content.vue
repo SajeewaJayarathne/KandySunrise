@@ -38,6 +38,10 @@
       <SectionGallery />
     </section>
 
+    <section id="view" class="section-view" ref="sectionViewRef">
+      <SectionView />
+    </section>
+
     <section id="schedule" class="section-schedule" ref="sectionScheduleRef">
       <div class="grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto] lg:grid-rows-1 gap-10 lg:gap-20">
         <div
@@ -103,6 +107,7 @@ import SectionAbout from './main-sections/section-about.vue';
 import SectionHighlights from './main-sections/section-highlights.vue';
 import SectionFeatures from './main-sections/section-features.vue';
 import SectionGallery from './main-sections/section-gallery.vue';
+import SectionView from './main-sections/section-view.vue';
 
 import ContactForm from './sub-components/contact-form.vue';
 import AudioPlayer from './sub-components/audio-player.vue';
@@ -126,6 +131,7 @@ const sectionAboutRef = ref();
 const sectionHighlightsRef = ref();
 const sectionFeaturesRef = ref();
 const sectionGalleryRef = ref();
+const sectionViewRef = ref();
 const sectionScheduleRef = ref();
 
 const mobileNavOpen = ref(false);
@@ -138,7 +144,7 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-  sections.push(sectionHomeRef, sectionAboutRef, sectionHighlightsRef, sectionFeaturesRef, sectionGalleryRef, sectionScheduleRef);
+  sections.push(sectionHomeRef, sectionAboutRef, sectionHighlightsRef, sectionFeaturesRef, sectionGalleryRef, sectionViewRef, sectionScheduleRef);
 });
 
 onUnmounted(() => {
