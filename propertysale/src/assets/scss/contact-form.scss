@@ -1,20 +1,20 @@
 @import "utils";
 
 form.contact-form {
-  @apply p-8 glassmorphism rounded-xl;
+  @apply p-4 lg:p-8 glassmorphism rounded-xl;
 
   > div {
-    @apply mb-6 w-full flex;
+    @apply lg:mb-6 w-full flex flex-col lg:flex-row;
 
     > div {
-      @apply block;
+      @apply block mb-6 lg:mb-0;
 
       &:first-child {
-        @apply mr-1;
+        @apply lg:mr-1;
       }
 
       &:last-child {
-        @apply ml-1;
+        @apply lg:ml-1;
       }
 
       &:only-child {

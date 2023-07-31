@@ -48,7 +48,7 @@ const selectedSlide = ref(null);
 
 const imgArraysByCat = ref({});
 const visibleImgArr = ref([]);
-const imgCountByCat = ref({view: 6, outer: 5, livingArea: 6, floors: 6, bed: 8, bath: 3, pantry: 3, kitchen: 1});
+const imgCountByCat = ref({view: 8, outer: 8, livingArea: 6, floors: 6, bed: 8, bath: 3, pantry: 3, kitchen: 1});
 
 const filters = ref([
   {id: 'all', label: 'All'},

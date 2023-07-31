@@ -44,7 +44,7 @@ nav {
     @apply h-full w-0 fixed left-0 top-0 overflow-x-hidden bg-primary/90 duration-700;
 
     &.open {
-      @apply w-full;
+      @apply w-screen;
     }
 
     ul.navmenu {

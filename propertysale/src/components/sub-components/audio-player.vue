@@ -21,7 +21,7 @@ const isPlaying = ref(false);
 onMounted(() => {
   setTimeout(() => {
     isPlaying.value = !audioPlayer.value?.paused;
-  }, 100);
+  }, 1000);
 });
 
 function onButtonClick(play) {

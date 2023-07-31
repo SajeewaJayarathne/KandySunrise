@@ -33,9 +33,8 @@
       </button>
       <button v-else type="submit" class="button-secondary" ref="submitBtn">Send Message</button>
 
-      <span v-if="isMobileAvailable" class="text-right">Or call on:
-        <br>
-        <a :href="'tel:' + mobileNumber" class="underline underline-offset-4">{{ mobileNumber }}</a>
+      <span v-if="isMobileAvailable" class="pt-3 lg:pt-0 text-center lg:text-right">Or call on:
+        <a :href="'tel:' + mobileNumber" class="lg:ml-4 underline underline-offset-4 inline-block">{{ mobileNumber }}</a>
       </span>
     </div>
   </form>

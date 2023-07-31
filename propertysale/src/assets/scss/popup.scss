@@ -2,7 +2,7 @@
 @import "utils";
 
 .vue-modal {
-  @apply fixed top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto bg-primary/90 z-200;
+  @apply fixed top-0 left-0 w-screen h-full overflow-x-hidden overflow-y-auto bg-primary/90 z-200;
 }
 
 .vue-modal-inner {
@@ -10,7 +10,7 @@
 }
 
 .vue-modal-content {
-  @apply relative bg-clip-padding rounded-md p-4 md:p-14 h-auto max-h-[80%] m-auto glassmorphism text-blue_2 animate zoom;
+  @apply relative bg-clip-padding rounded-md p-4 md:p-14 h-[80vh] m-auto glassmorphism text-blue_2 animate zoom;
 
   > button {
     @apply absolute -top-3 -right-3;
@@ -19,5 +19,5 @@
 
 /* Customisation */
 .section-gallery .vue-modal-content {
-  @apply h-[80%] p-4;
+  @apply object-contain lg:object-cover p-4;
 }

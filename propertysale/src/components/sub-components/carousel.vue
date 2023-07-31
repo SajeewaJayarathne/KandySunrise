@@ -9,7 +9,7 @@
         />
         <div class="absolute bottom-0 flex flex-col w-full h-1/4 bg-gray-800/60 text-center text-white rounded">
           <h5 class="mt-auto">{{ slide.title }}</h5>
-          <button @click="openPopup(slide.id)" class="text-sm underline mb-auto">Read More...</button>
+          <button @click="handleSlideClick(slide.id)" class="text-sm underline mb-auto">Read More...</button>
         </div>
       </div>
     </Slide>
@@ -19,36 +19,18 @@
       <Pagination/>
     </template>
   </Carousel>
-
-  <Popup :open="isOpen" @close="isOpen = false">
-    <div class="h-full grid grid-cols-2 gap-x-14">
-      <img
-          :src="'../src/assets/images/' + selectedSlide.imgName"
-          :alt="selectedSlide.title"
-          class="h-full w-full object-cover rounded"
-      />
-      <div class="flex flex-col">
-        <h4>{{selectedSlide.title}}</h4>
-        <p class="mb-auto mt-12 leading-7">{{selectedSlide.details}}</p>
-      </div>
-
-    </div>
-  </Popup>
 </template>
 
 <script>
 import {ref} from 'vue';
-import 'vue3-carousel/dist/carousel.css';
 import {Carousel, Slide, Pagination, Navigation} from 'vue3-carousel';
+import 'vue3-carousel/dist/carousel.css';
 
-import Utils from '../utils';
-import Popup from '../sub-components/popup.vue';
 import IconPrev from '../icons/icon-prev.vue';
 import IconNext from '../icons/icon-next.vue';
 
 export default {
   components: {
-    Popup,
     IconPrev,
     IconNext,
     Carousel,
@@ -72,29 +54,27 @@ export default {
     breakpoints: {
       type: Object,
       default: {}
+    },
+    openPopup: {
+      type: Function
     }
   },
   setup(props) {
-    const slides = ref(props.slides);
+    const openPopup = ref(props.openPopup);
     const isOpen = ref(false);
     const selectedSlide = ref('');
 
-    function openPopup(slideId) {
-      isOpen.value = true;
-      selectedSlide.value = slides.value[slideId];
-
-      Utils.onModalStateChanged(true);
+    function handleSlideClick(slideId) {
+      if (openPopup.value) {
+        openPopup.value(slideId);
+      }
     }
 
     return {
       isOpen,
       selectedSlide,
-      openPopup: openPopup
+      handleSlideClick
     };
   }
 };
 </script>
-
-<style scoped lang="scss">
-
-</style>

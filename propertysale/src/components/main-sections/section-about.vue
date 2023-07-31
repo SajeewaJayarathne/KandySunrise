@@ -186,9 +186,9 @@
       data-aos-duration="1500"
     >
       <img
-          src="../../assets/images/Staircase.jpg"
+          src="../../assets/images/AerialView.jpg"
           alt="Staircase"
-          class="h-[80vh] w-full lg:h-full object-cover aspect-square brightness-110 rounded"
+          class="h-[80vh] w-full lg:h-full object-cover object-left-bottom aspect-square brightness-110 rounded"
       />
     </div>
   </div>

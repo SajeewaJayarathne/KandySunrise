@@ -27,13 +27,30 @@
               itemsToShow: 3,
               snapAlign: 'start'
             }}"
+        :openPopup="openPopup"
     />
   </div>
+
+  <Popup :open="showPopup" @close="showPopup = false">
+    <div class="h-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
+      <img
+          :src="'../src/assets/images/' + selectedSlide.imgName"
+          :alt="selectedSlide.title"
+          class="h-full w-full object-cover rounded"
+      />
+      <div class="flex flex-col overflow-y-scroll">
+        <h4>{{selectedSlide.title}}</h4>
+        <p class="mb-auto mt-4 lg:mt-12 leading-7">{{selectedSlide.details}}</p>
+      </div>
+    </div>
+  </Popup>
 </template>
 
 <script setup>
 import {ref} from 'vue';
+import Utils from '../utils.js';
 import Carousel from '../sub-components/carousel.vue';
+import Popup from '../sub-components/popup.vue';
 
 const slides = ref([
   {
@@ -61,4 +78,14 @@ const slides = ref([
     details: 'Immerse yourself in the allure of a tranquil neighborhood adorned with a touch of prestige along Darshana Mawatha. Nestled within this sought-after locale, you\'ll find yourself surrounded by a community of highly regarded professionals, fostering an ambiance of respect and refinement. Adorned with elegantly crafted retaining walls, the surroundings exude a sense of sophistication, creating an enchanting backdrop for your dream home. Discover the serenity and elegance that awaits you in this coveted neighborhood, where every moment is steeped in tranquility and grace.'
   },
 ]);
+
+const showPopup = ref(false);
+const selectedSlide = ref(slides.value[0]);
+
+function openPopup(index) {
+  showPopup.value = true;
+  selectedSlide.value = slides.value[index];
+
+  Utils.onModalStateChanged(true);
+}
 </script>
