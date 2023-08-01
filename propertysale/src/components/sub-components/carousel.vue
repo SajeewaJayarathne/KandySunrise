@@ -3,9 +3,10 @@
     <Slide v-for="slide in slides" :key="slide.id">
       <div class="carousel__item h-96 w-full rounded relative cursor-pointer" @click="openPopup(slide.id)">
         <img
-            :src="'../src/assets/images/' + slide.imgName"
+            :src="getImageUrl(slide.imgName)"
             :alt="slide.title"
             class="h-full w-full object-cover rounded brightness-120"
+            loading="lazy"
         />
         <div class="absolute bottom-0 flex flex-col w-full h-1/4 bg-gray-800/60 text-center text-white rounded">
           <h5 class="mt-auto">{{ slide.title }}</h5>
@@ -70,10 +71,15 @@ export default {
       }
     }
 
+    const getImageUrl = (imgName) => {
+      return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;
+    }
+
     return {
       isOpen,
       selectedSlide,
-      handleSlideClick
+      handleSlideClick,
+      getImageUrl
     };
   }
 };

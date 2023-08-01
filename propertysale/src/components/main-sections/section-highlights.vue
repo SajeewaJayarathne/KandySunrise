@@ -34,11 +34,12 @@
   <Popup :open="showPopup" @close="showPopup = false">
     <div class="h-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
       <img
-          :src="'../src/assets/images/' + selectedSlide.imgName"
+          :src="getImageUrl(selectedSlide.imgName)"
           :alt="selectedSlide.title"
           class="h-full w-full object-cover rounded"
+          loading="lazy"
       />
-      <div class="flex flex-col overflow-y-scroll">
+      <div class="flex flex-col overflow-y-auto">
         <h4>{{selectedSlide.title}}</h4>
         <p class="mb-auto mt-4 lg:mt-12 leading-7">{{selectedSlide.details}}</p>
       </div>
@@ -81,6 +82,10 @@ const slides = ref([
 
 const showPopup = ref(false);
 const selectedSlide = ref(slides.value[0]);
+
+const getImageUrl = (imgName) => {
+  return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;
+}
 
 function openPopup(index) {
   showPopup.value = true;

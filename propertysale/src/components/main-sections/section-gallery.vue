@@ -29,9 +29,10 @@
 
   <Popup :open="showPopup" @close="showPopup = false">
     <img
-        :src="'../src/assets/images/' + selectedSlide"
+        :src="getImageUrl(selectedSlide)"
         :alt="selectedSlide"
         class="h-full w-full object-cover rounded"
+        loading="lazy"
     />
   </Popup>
 </template>
@@ -69,7 +70,7 @@ onBeforeMount(() => {
     imgArraysByCat.value[key] = [];
 
     for (let i = 1; i <= value; i++) {
-      imgName = `gallery/${key.charAt(0).toUpperCase()}${key.slice(1)}_${i}.jpg`;
+      imgName = `${key.charAt(0).toUpperCase()}${key.slice(1)}_${i}.jpg`;
       imgArraysByCat.value[key].push(imgName);
       visibleImgArr.value.push(imgName);
     }
@@ -77,6 +78,10 @@ onBeforeMount(() => {
     imgArraysByCat.value['all'] = [...visibleImgArr.value];
   });
 });
+
+const getImageUrl = (imgName) => {
+  return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;
+}
 
 function onFilterChange(filterId) {
   selectedFilter.value = filterId;

@@ -3,10 +3,11 @@
     <Slide v-for="(slide, index) in slides" :key="index">
       <div class="carousel__item h-[50vh] lg:h-[80vh] w-full rounded relative">
         <img
-            :src="'../src/assets/images/' + slide"
+            :src="getImageUrl(slide)"
             :alt="slide"
             class="h-full w-full object-cover rounded cursor-pointer"
             @click="handleImgClick(index)"
+            loading="lazy"
         />
       </div>
     </Slide>
@@ -27,10 +28,11 @@
     <Slide v-for="(slide, index) in slides" :key="index">
       <div class="carousel__item" @click="slideTo(index)">
         <img
-            :src="'../src/assets/images/' + slide"
+            :src="getImageUrl(slide)"
             :alt="slide"
             class="w-full h-auto object-cover aspect-4/3"
             :class="{'active-img': currentSlide === index}"
+            loading="lazy"
         />
       </div>
     </Slide>
@@ -85,11 +87,16 @@ export default {
       }
     }
 
+    const getImageUrl = (imgName) => {
+      return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;
+    }
+
     return {
       currentSlide,
       thumbnailCount,
       slideTo,
-      handleImgClick
+      handleImgClick,
+      getImageUrl
     };
 
   },

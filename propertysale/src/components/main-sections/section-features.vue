@@ -14,8 +14,9 @@
       data-aos-duration="1500"
     >
       <img class="h-[60vh] w-full lg:h-full object-cover aspect-square brightness-110 rounded transition"
-           :src="'../src/assets/images/' + selectedImg.imgName"
+           :src="getImageUrl(selectedImg.imgName)"
            :alt="selectedImg.alt"
+           loading="lazy"
       />
     </div>
 
@@ -68,13 +69,16 @@ import TabWrapper from '../sub-components/tab-wrapper.vue';
 import Tab from '../sub-components/tab.vue';
 
 const imagesArr = ref([
-  {imgName: 'gallery/Floors_6.jpg', alt: 'Floor Details'},
-  {imgName: 'gallery/Bed_2.jpg', alt: 'Bedroom Details'},
-  {imgName: 'gallery/LivingArea_1.jpg', alt: 'Property Details'}
+  {imgName: 'Floors_6.jpg', alt: 'Floor Details'},
+  {imgName: 'Bed_2.jpg', alt: 'Bedroom Details'},
+  {imgName: 'LivingArea_1.jpg', alt: 'Property Details'}
 ]);
 
 const selectedImg = ref(imagesArr.value[0]);
 
+const getImageUrl = (imgName) => {
+ return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;
+}
 function onClickTab(tabId) {
   selectedImg.value = imagesArr.value[tabId];
 }

@@ -7,4 +7,6 @@ import './assets/scss/style.scss'
 
 createApp(App).mount('#app');
 
-AOS.init();
+document.addEventListener('DOMContentLoaded',()=>{
+    AOS.init();
+});
