@@ -38,30 +38,15 @@
       </span>
     </div>
   </form>
-
-  <Popup :open="showSubmitMessage" @close="showSubmitMessage = false">
-    <div v-if="submitMessage != null" class="h-full">
-      <h3 class="text-center flex justify-center">
-        <IconSuccess v-if="submitMessage.type === 1" class="mr-4 my-auto"/>
-        <IconReject v-else class="mr-4 my-auto"/>
-        {{ submitMessage.title }}
-      </h3>
-      <p class="mt-6 lg:mt-12 text-lg">{{ submitMessage.body }}</p>
-    </div>
-  </Popup>
 </template>
 
 <script setup>
 import {ref, onBeforeMount, onMounted} from 'vue';
 import {defineProps} from '@vue/runtime-core';
 
-import Popup from '../sub-components/popup.vue';
-import IconSuccess from '../icons/icon-success.vue';
-import IconReject from '../icons/icon-reject.vue';
+const props = defineProps(['isMobileAvailable', 'mobileNumber', 'onSubmit']);
 
-defineProps(['isMobileAvailable', 'mobileNumber']);
-
-const WEB3FORMS_ACCESS_KEY = 'cf2b2317-13d3-4e77-a3c9-3bdf1d77fc99';
+const WEB3FORMS_ACCESS_KEY = 'bb9307d9-0e65-4962-bea3-f8a67a0451d8'; //Web3Forms
 
 const name = ref("");
 const email = ref("");
@@ -72,8 +57,6 @@ const message = ref("");
 const minDate = ref(null);
 const btnWidth = ref(0);
 const submitBtn = ref(null);
-const submitMessage = ref(null);
-const showSubmitMessage = ref(false);
 
 const inProgress = ref(false);
 
@@ -97,18 +80,6 @@ function _setDefaultDate() {
   }
 
   minDate.value = year + '-' + month + '-' + day;
-}
-
-function _showSubmitMessage(result) {
-  submitMessage.value = {
-    type: result.success ? 1 : 0,
-    title: result.message || 'Email sent successfully!',
-    body: result.success ?
-        'We appreciate you contacting us in scheduling a visit. We will get back in touch with you soon! Have a great day!'
-        : 'An error has occurred while sending the email. Please submit your information again after a few minutes. Thank you! Have a great day!'
-  }
-
-  showSubmitMessage.value = true;
 }
 
 const submitForm = async () => {
@@ -141,7 +112,10 @@ const submitForm = async () => {
     message.value = '';
 
     _setDefaultDate();
-    _showSubmitMessage(result)
+
+    if (props.onSubmit) {
+      props.onSubmit(result);
+    }
   }
 };
 </script>

@@ -66,10 +66,22 @@
             <ContactForm
                 :isMobileAvailable="true"
                 :mobileNumber="'+61 406 195 123'"
+                :onSubmit="onFormSubmit"
             />
           </div>
         </div>
       </div>
+
+      <Popup :open="showSubmitMessage" @close="showSubmitMessage = false">
+        <div v-if="submitMessage != null" class="h-full">
+          <h3 class="text-center flex justify-center">
+            <IconSuccess v-if="submitMessage.type === 1" class="mr-4 my-auto"/>
+            <IconReject v-else class="mr-4 my-auto"/>
+            {{ submitMessage.title }}
+          </h3>
+          <p class="mt-6 lg:mt-12 text-lg">{{ submitMessage.body }}</p>
+        </div>
+      </Popup>
     </section>
   </section>
 
@@ -111,9 +123,12 @@ import SectionView from './main-sections/section-view.vue';
 
 import ContactForm from './sub-components/contact-form.vue';
 import AudioPlayer from './sub-components/audio-player.vue';
+import Popup from './sub-components/popup.vue';
 
 import IconClose from './icons/icon-close.vue';
 import IconMenu from './icons/icon-menu.vue';
+import IconReject from './icons/icon-reject.vue';
+import IconSuccess from './icons/icon-success.vue';
 
 const view = ref({topOfPage: true});
 const navItems = ref([
@@ -136,6 +151,9 @@ const sectionScheduleRef = ref();
 
 const mobileNavOpen = ref(false);
 const activeMenuId = ref(navItems.value[0].id);
+
+const submitMessage = ref(null);
+const showSubmitMessage = ref(false);
 
 let sectionTop, sectionId;
 
@@ -176,5 +194,17 @@ function openNav() {
 function closeNav() {
   mobileNavOpen.value = false;
   Utils.onModalStateChanged(false);
+}
+
+function onFormSubmit(result) {
+  submitMessage.value = {
+    type: result.success ? 1 : 0,
+    title: result.message || (result.success ? 'Email sent successfully!' : 'Email sending failed!'),
+    body: result.success ?
+        'We appreciate you contacting us in scheduling a visit. We will get back in touch with you soon! Have a great day!'
+        : 'An error has occurred while sending the email. Please submit your information again after a few minutes. Thank you! Have a great day!'
+  }
+
+  showSubmitMessage.value = true;
 }
 </script>
