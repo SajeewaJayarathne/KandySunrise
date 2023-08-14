@@ -7,7 +7,20 @@
             class="item"
             :class="activeMenuId === item.id ? 'menu_active' : ''"
         >
-          <a :href="'#' + item.id">{{ item.label }}</a>
+          <a :href="'#' + item.id">{{ localCurrentLangFile.nav[item.tag] }}</a>
+        </li>
+        <li v-if="isLangDdAvailable" class="item dropdown">
+          <a href="javascript:void(0)" class="dropdown-button">Lang</a>
+          <div class="dropdown-content">
+            <a
+              v-for="lang in languages"
+              :class="selectedLang === lang.id ? 'lang-active' : ''"
+              href="#"
+              @click="onChangeLang(lang.id)"
+            >
+              {{ lang.label }}
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
@@ -98,7 +111,7 @@
             class="item"
             :class="activeMenuId === item.id ? 'menu_active' : ''"
         >
-          <a :href="'#' + item.id" @click="closeNav()">{{ item.label }}</a>
+          <a :href="'#' + item.id" @click="closeNav()">{{ localCurrentLangFile.nav[item.tag] }}</a>
         </li>
       </ul>
     </div>
@@ -152,13 +165,19 @@ const sectionScheduleRef = ref();
 const mobileNavOpen = ref(false);
 const activeMenuId = ref(navItems.value[0].id);
 
-const submitMessage = ref(null);
-const showSubmitMessage = ref(false);
+const isLangDdAvailable = ref(false);
+const languages = ref([
+  {id: Constants.LANG_CODES.EN, label: 'EN'},
+  {id: Constants.LANG_CODES.ZH, label: '中文'}
+]);
+const selectedLang = ref(languages.value[0].id);
+const localCurrentLangFile = ref(getCurrentLangFile());
 
 let sectionTop, sectionId;
 
 onBeforeMount(() => {
   window.addEventListener('scroll', handleScroll);
+  setCurrentLangFile(selectedLang.value);
 });
 
 onMounted(() => {
@@ -196,15 +215,8 @@ function closeNav() {
   Utils.onModalStateChanged(false);
 }
 
-function onFormSubmit(result) {
-  submitMessage.value = {
-    type: result.success ? 1 : 0,
-    title: result.message || (result.success ? 'Email sent successfully!' : 'Email sending failed!'),
-    body: result.success ?
-        'We appreciate you contacting us in scheduling a visit. We will get back in touch with you soon! Have a great day!'
-        : 'An error has occurred while sending the email. Please submit your information again after a few minutes. Thank you! Have a great day!'
-  }
-
-  showSubmitMessage.value = true;
+const onChangeLang = (langID) => {
+  selectedLang.value = langID;
+  setCurrentLangFile(langID);
 }
 </script>
