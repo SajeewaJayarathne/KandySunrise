@@ -13,7 +13,7 @@ module.exports = {
       },
       fontFamily: {
         main: ['EB Garamond', 'serif'],
-        'sub-heading': ['Tangerine', 'serif']
+        secondary: ['Tangerine', 'serif']
       },
       aspectRatio: {
         '4/3': '4 / 3',
