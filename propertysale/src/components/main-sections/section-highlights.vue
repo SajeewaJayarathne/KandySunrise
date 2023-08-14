@@ -26,8 +26,24 @@
               itemsToShow: 3,
               snapAlign: 'start'
             }}"
-        :openPopup="openPopup"
-    />
+    >
+      <Slide v-for="slide in slides" :key="slide.id">
+        <div class="carousel__item h-96 w-full rounded relative cursor-pointer" @click="openPopup(slide.id)">
+          <img
+              :src="getImageUrl(slide.imgName)"
+              :alt="localCurrentLang.highlights.content[slide.tag]"
+              class="h-full w-full object-cover rounded brightness-120"
+              loading="lazy"
+          />
+          <div class="absolute bottom-0 flex flex-col w-full h-1/4 bg-gray-800/60 text-center text-white rounded">
+            <h5 class="mt-auto">{{ localCurrentLang.highlights.content[slide.tag] }}</h5>
+            <button @click="openPopup(slide.id)" class="text-sm underline mb-auto">
+              {{localCurrentLang.common.read_more }}
+            </button>
+          </div>
+        </div>
+      </Slide>
+    </Carousel>
   </div>
 
   <Popup :open="showPopup" @close="showPopup = false">
@@ -49,6 +65,7 @@
 
 <script setup>
 import {ref} from 'vue';
+import {Slide} from 'vue3-carousel';
 import {getCurrentLangFile} from '../utils/state.vue';
 
 import Utils from '../utils/utils.js';
