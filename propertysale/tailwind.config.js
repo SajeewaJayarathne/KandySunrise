@@ -18,6 +18,9 @@ module.exports = {
       aspectRatio: {
         '4/3': '4 / 3',
       },
+      gridTemplateColumns: {
+        '2-auto': 'repeat(2, auto)',
+      },
       colors: {
         primary: '#372d35',
         secondary: '#997e81',

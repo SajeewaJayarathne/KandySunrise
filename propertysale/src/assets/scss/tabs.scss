@@ -21,6 +21,10 @@
     }
   }
 
+  .tab_content > div {
+    @apply pt-4;
+  }
+
   .tabs_button {
     @apply text-sm xl:text-base;
   }

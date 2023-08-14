@@ -7,7 +7,7 @@ form.contact-form {
     @apply lg:mb-6 w-full flex flex-col lg:flex-row;
 
     > div {
-      @apply block mb-6 lg:mb-0;
+      @apply block mb-6 lg:mb-0 w-full lg:w-1/2;
 
       &:first-child {
         @apply lg:mr-1;

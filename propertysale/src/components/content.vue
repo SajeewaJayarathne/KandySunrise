@@ -1,11 +1,16 @@
 <template>
-  <header>
+  <header
+      data-aos="fade-down"
+      data-aos-duration="2000"
+      data-aos-delay="750"
+      data-aos-once="true"
+  >
     <nav :class="{ 'onScroll': !view.topOfPage}">
       <ul class="navmenu">
         <li
             v-for="item in navItems"
             class="item"
-            :class="activeMenuId === item.id ? 'menu_active' : ''"
+            :class="activeMenuId === item.id ? 'menu-active' : ''"
         >
           <a :href="'#' + item.id">{{ localCurrentLangFile.nav[item.tag] }}</a>
         </li>
@@ -36,7 +41,7 @@
     </section>
 
     <section id="about" class="section-about" ref="sectionAboutRef">
-      <SectionAbout />
+      <SectionAbout/>
     </section>
 
     <section id="highlights" class="section-highlights text-center" ref="sectionHighlightsRef">
@@ -44,15 +49,15 @@
     </section>
 
     <section id="features" class="section-features" ref="sectionFeaturesRef">
-      <SectionFeatures />
+      <SectionFeatures/>
     </section>
 
     <section id="gallery" class="section-gallery" ref="sectionGalleryRef">
-      <SectionGallery />
+      <SectionGallery/>
     </section>
 
     <section id="view" class="section-view" ref="sectionViewRef">
-      <SectionView />
+      <SectionView/>
     </section>
 
     <section id="schedule" class="section-schedule" ref="sectionScheduleRef">
@@ -71,7 +76,7 @@
         <li
             v-for="item in navItems"
             class="item"
-            :class="activeMenuId === item.id ? 'menu_active' : ''"
+            :class="activeMenuId === item.id ? 'menu-active' : ''"
         >
           <a :href="'#' + item.id" @click="closeNav()">{{ localCurrentLangFile.nav[item.tag] }}</a>
         </li>
@@ -86,7 +91,9 @@
 
 <script setup>
 import {ref, onBeforeMount, onMounted, onUnmounted} from 'vue';
-import Utils from './utils';
+import {getCurrentLangFile, setCurrentLangFile} from './utils/state.vue';
+import Utils from './utils/utils';
+import {Constants} from './utils/constants';
 
 /* Sections */
 import SectionHero from './main-sections/section-hero.vue';
@@ -97,23 +104,19 @@ import SectionGallery from './main-sections/section-gallery.vue';
 import SectionView from './main-sections/section-view.vue';
 import SectionSchedule from './main-sections/section-schedule.vue';
 
-import ContactForm from './sub-components/contact-form.vue';
 import AudioPlayer from './sub-components/audio-player.vue';
-import Popup from './sub-components/popup.vue';
 
 import IconClose from './icons/icon-close.vue';
 import IconMenu from './icons/icon-menu.vue';
-import IconReject from './icons/icon-reject.vue';
-import IconSuccess from './icons/icon-success.vue';
 
 const view = ref({topOfPage: true});
 const navItems = ref([
-  {id: 'home', label: 'Home'},
-  {id: 'about', label: 'About'},
-  {id: 'highlights', label: 'Highlights'},
-  {id: 'features', label: 'Features'},
-  {id: 'gallery', label: 'Gallery'},
-  {id: 'schedule', label: 'Schedule a Visit'}
+  {id: 'home', tag: 'home'},
+  {id: 'about', tag: 'about'},
+  {id: 'highlights', tag: 'highlights'},
+  {id: 'features', tag: 'features'},
+  {id: 'gallery', tag: 'gallery'},
+  {id: 'schedule', tag: 'schedule'}
 ]);
 
 const sections = [];

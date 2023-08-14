@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {ref, inject} from 'vue';
+import {inject} from 'vue';
 
 export default {
   name: 'tab',
@@ -13,7 +13,7 @@ export default {
     title: String,
     tabId: Number
   },
-  setup(props) {
+  setup() {
     const selectedTitle = inject('selectedTitle');
 
     return {

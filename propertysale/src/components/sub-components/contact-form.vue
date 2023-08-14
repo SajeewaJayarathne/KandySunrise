@@ -2,38 +2,38 @@
   <form class="contact-form" @submit.prevent="submitForm">
     <div>
       <div>
-        <label class="required">Name</label>
+        <label class="required">{{ localCurrentLang.form.name }}</label>
         <input type="text" name="name" v-model="name" required/>
       </div>
       <div>
-        <label class="required">Email</label>
+        <label class="required">{{ localCurrentLang.form.email }}</label>
         <input type="email" name="email" v-model="email" required/>
       </div>
     </div>
     <div>
       <div>
-        <label class="required">Phone</label>
+        <label class="required">{{ localCurrentLang.form.phone }}</label>
         <input type="text" name="phone" v-model="phone" required/>
       </div>
       <div>
-        <label class="required">Requested Date</label>
+        <label class="required">{{ localCurrentLang.form.date }}</label>
         <input type="date" name="reqDate" required v-model="reqDate" :min="minDate"/>
       </div>
     </div>
     <div>
       <div>
-        <label>Other Requests</label>
+        <label>{{ localCurrentLang.form.other_requests }}</label>
         <textarea name="message" v-model="message"></textarea>
       </div>
     </div>
 
     <div class="items-center justify-between">
-      <button v-if="inProgress" class="button-secondary !py-3 cursor-not-allowed" :style="{width: `${btnWidth}px`}" disabled>
+      <button v-if="inProgress" class="button button-secondary !py-3 cursor-not-allowed" :style="{width: `${btnWidth}px`}" disabled>
         <div class="loader"></div>
       </button>
-      <button v-else type="submit" class="button-secondary" ref="submitBtn">Send Message</button>
+      <button v-else type="submit" class="button button-secondary" ref="submitBtn">{{ localCurrentLang.form.send }}</button>
 
-      <span v-if="isMobileAvailable" class="pt-3 lg:pt-0 text-center lg:text-right">Or call on:
+      <span v-if="isMobileAvailable" class="pt-3 lg:pt-0 text-center lg:text-right">{{ localCurrentLang.form.or_call }}
         <a :href="'tel:' + mobileNumber" class="lg:ml-4 underline underline-offset-4 inline-block">{{ mobileNumber }}</a>
       </span>
     </div>
@@ -42,11 +42,13 @@
 
 <script setup>
 import {ref, onBeforeMount, onMounted} from 'vue';
+import {getCurrentLangFile} from '../utils/state.vue';
 import {defineProps} from '@vue/runtime-core';
 
 const props = defineProps(['isMobileAvailable', 'mobileNumber', 'onSubmit']);
 
 const WEB3FORMS_ACCESS_KEY = 'bb9307d9-0e65-4962-bea3-f8a67a0451d8'; //Web3Forms
+const localCurrentLang = ref(getCurrentLangFile());
 
 const name = ref("");
 const email = ref("");

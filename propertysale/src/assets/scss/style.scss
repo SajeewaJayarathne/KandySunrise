@@ -46,8 +46,8 @@ h6 {
   @apply font-bold;
 }
 
-[class^="button-"] {
-  @apply w-auto p-4 font-bold transition duration-200 text-white;
+.button {
+  @apply w-auto py-3 px-4 font-bold transition duration-200 text-white;
 
   &:hover {
     @apply rounded-lg;
@@ -55,6 +55,7 @@ h6 {
 }
 
 .button-primary {
+  @extend .button;
   @apply bg-secondary;
 
   &:hover {
@@ -67,6 +68,7 @@ h6 {
 }
 
 .button-secondary {
+  @extend .button;
   @apply bg-blue_1;
 
   &:hover {
