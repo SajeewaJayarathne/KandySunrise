@@ -3,7 +3,7 @@
     <div
         class="col-start-1 row-start-2 lg:row-start-1"
         data-aos="fade-right"
-        data-aos-duration="1000"
+        data-aos-duration="2000"
     >
       <div class="w-full h-[40vh] lg:h-full">
         <iframe class="shadow-xl"
@@ -15,7 +15,7 @@
 
     <div
         data-aos="fade-left"
-        data-aos-duration="1000"
+        data-aos-duration="2000"
     >
       <h3 class="text-center lg:text-left">{{ localCurrentLang.hero.schedule }}</h3>
       <div class="mt-6 md:mt-12 mx-auto">

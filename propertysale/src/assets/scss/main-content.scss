@@ -45,7 +45,7 @@
     @apply absolute bottom-4 grid grid-cols-2-auto text-center text-white py-4;
 
     > div.grid-item {
-      @apply block opacity-80 px-8;
+      @apply block opacity-60 px-8;
       transition: opacity 0.3s ease;
 
       &:first-child {
