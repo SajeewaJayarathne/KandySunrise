@@ -13,6 +13,7 @@
   >
     <Carousel
         :slides-to-show="1"
+        :wrap-around="true"
         :breakpoints="{
             600: {
               itemsToShow: 1.5,

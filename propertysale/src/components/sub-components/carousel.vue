@@ -1,5 +1,5 @@
 <template>
-  <Carousel :items-to-show="slidesToShow" :wrap-around="true" :transition="500" :breakpoints="breakpoints">
+  <Carousel :items-to-show="slidesToShow" :wrap-around="wrapAround" :transition="500" :breakpoints="breakpoints">
     <!-- The slot should include the vue3-carousel <Slide> element -->
     <slot/>
 
@@ -28,6 +28,10 @@ export default {
     breakpoints: {
       type: Object,
       default: {}
+    },
+    wrapAround: {
+      type: Boolean,
+      default: false
     }
   }
 };
