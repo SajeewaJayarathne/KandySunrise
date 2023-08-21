@@ -17,8 +17,8 @@
         data-aos="fade-left"
         data-aos-duration="2000"
     >
-      <h3 class="text-center lg:text-left">{{ localCurrentLang.hero.schedule }}</h3>
-      <div class="mt-6 md:mt-12 mx-auto">
+      <h3 class="text-center lg:text-left text-white">{{ localCurrentLang.hero.schedule }}</h3>
+      <div class="mt-6 md:mt-12 mx-auto text-white">
         <ContactForm
             :isMobileAvailable="true"
             :mobileNumber="'+61 406 195 123'"
