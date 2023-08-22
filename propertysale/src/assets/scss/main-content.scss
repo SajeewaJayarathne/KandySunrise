@@ -155,7 +155,9 @@
     background: unset;
   }
 
-  &.section-schedule, &.section-highlights:before {
-    @apply content-[""] absolute bg-secondary inset-0 opacity-80;
+  &.section-schedule, &.section-highlights {
+    &:before {
+      @apply content-[""] absolute bg-secondary inset-0 opacity-80;
+    }
   }
 }

@@ -1,6 +1,13 @@
 <template>
+  <h2
+      class="text-center text-white"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+  >
+    {{ localCurrentLang.highlights.title }}
+  </h2>
   <div
-      class="highlights-container"
+      class="highlights-container mt-6 lg:mt-12"
       data-aos="fade-up"
       data-aos-duration="800"
   >
