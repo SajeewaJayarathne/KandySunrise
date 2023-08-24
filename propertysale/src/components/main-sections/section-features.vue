@@ -72,7 +72,7 @@ const tabs = ref([
   {title: 'floors', content: ['floor_4', 'floor_3', 'floor_2', 'floor_g']},
   {title: 'bedrooms', content: ['bath', 'ac']},
   {title: 'property', content: ['security', 'solar']}
-])
+]);
 
 const getImageUrl = (imgName) => {
   return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;

@@ -15,7 +15,7 @@
       {{ localCurrentLang.hero.heading }}
     </h1>
 
-    <div class="mt-8 ml-4 border-l-2 border-white"
+    <div class="mt-8 ml-4 lg:border-l-2 lg:border-white"
          data-aos="fade-right"
          data-aos-duration="2000"
          data-aos-delay="1500"
@@ -39,13 +39,14 @@
       <h6>{{ localCurrentLang.hero.want_to_book }}</h6>
       <div>
         <a href="https://www.booking.com/hotel/lk/mountain-views.en-gb.html" target="_blank" type="button" class="button button-primary mr-2">{{ localCurrentLang.hero.booking }}</a>
-        <a href="https://www.airbnb.com.au/rooms/12785680" target="_blank" type="button" class="button button-primary">{{ localCurrentLang.hero.airbnb }}</a>
+        <a href="https://www.airbnb.com.au/rooms/12785680" target="_blank" type="button" class="button button-primary mr-2">{{ localCurrentLang.hero.airbnb }}</a>
+        <a href="#contact" type="button" class="button button-primary" @click="setFormType(Constants.FORM_TYPES.BOOK)">{{ localCurrentLang.hero.direct }}</a>
       </div>
     </div>
 
     <div class="grid-item">
       <h6>{{ localCurrentLang.hero.want_to_buy }}</h6>
-      <div><a href="#schedule" type="button" class="button button-primary">{{ localCurrentLang.hero.schedule }}</a>
+      <div><a href="#contact" type="button" class="button button-primary" @click="setFormType(Constants.FORM_TYPES.SCHEDULE)">{{ localCurrentLang.hero.schedule }}</a>
       </div>
     </div>
   </section>
@@ -53,7 +54,12 @@
 
 <script setup>
 import {ref} from 'vue';
+import {defineProps} from '@vue/runtime-core';
+
 import {getCurrentLangFile} from '../utils/state.vue';
+import {Constants} from '../utils/constants';
+
+defineProps(['setFormType']);
 
 const localCurrentLang = ref(getCurrentLangFile());
 </script>

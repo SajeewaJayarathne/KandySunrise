@@ -17,14 +17,29 @@
         data-aos="fade-left"
         data-aos-duration="2000"
     >
-      <h3 class="text-center lg:text-left text-white">{{ localCurrentLang.hero.schedule }}</h3>
-      <div class="mt-6 md:mt-12 mx-auto text-white">
-        <ContactForm
-            :isMobileAvailable="true"
-            :mobileNumber="'+61 406 195 123'"
-            :onSubmit="onFormSubmit"
-        />
-      </div>
+      <h3 class="text-center lg:text-left">{{ localCurrentLang.common.contact }}</h3>
+      <TabWrapper :on-tab-change="onTabChange" :selectedTabId="formOption">
+        <Tab :title="localCurrentLang.common.book_for_holiday" :tabId="0">
+          <Form
+              class="mt-6"
+              :isMobileAvailable="false"
+              :onSubmit="onFormSubmit"
+              :btnLabel="localCurrentLang.form.request_book"
+              :formType="Constants.FORM_TYPES.BOOK"
+          />
+        </Tab>
+
+        <Tab :title="localCurrentLang.hero.schedule" :tabId="1">
+          <Form
+              class="mt-6"
+              :isMobileAvailable="true"
+              :mobileNumber="'+61 406 195 123'"
+              :onSubmit="onFormSubmit"
+              :btnLabel="localCurrentLang.form.send"
+              :formType="Constants.FORM_TYPES.SCHEDULE"
+          />
+        </Tab>
+      </TabWrapper>
     </div>
   </div>
 
@@ -42,12 +57,20 @@
 
 <script setup>
 import {ref} from 'vue';
+import {defineProps} from '@vue/runtime-core';
+
+import {Constants} from '../utils/constants';
 import {getCurrentLangFile} from '../utils/state.vue';
 
-import ContactForm from '../sub-components/contact-form.vue';
+import Form from '../sub-components/form.vue';
 import Popup from '../sub-components/popup.vue';
 import IconReject from '../icons/icon-reject.vue';
 import IconSuccess from '../icons/icon-success.vue';
+import TabWrapper from '../sub-components/tab-wrapper.vue';
+import Tab from '../sub-components/tab.vue';
+
+const props = defineProps(['formOption', 'onTabChange']);
+const tabs = ref(['book', 'schedule']);
 
 const localCurrentLang = ref(getCurrentLangFile());
 
@@ -64,5 +87,9 @@ function onFormSubmit(result) {
   }
 
   showSubmitMessage.value = true;
+}
+
+function onClickTab(tabId) {
+
 }
 </script>

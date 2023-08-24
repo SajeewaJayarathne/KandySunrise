@@ -29,3 +29,18 @@
     @apply text-sm xl:text-base;
   }
 }
+
+/* Customisation */
+.section-contact .tabs {
+  @apply glassmorphism-0 px-0 pb-0;
+
+  .tabs_header {
+    @apply justify-start;
+
+    > li.tab_active {
+      @apply text-primary;
+      border-color: $tertiary !important;
+
+    }
+  }
+}

@@ -5,7 +5,7 @@ export const LanguageZh = {
         highlights: 'Highlights',
         features: 'Features',
         gallery: 'Gallery',
-        schedule: 'Schedule'
+        contact: 'Contact'
     },
     hero: {
         heading: 'Kandy Sunrise',
@@ -14,7 +14,8 @@ export const LanguageZh = {
         want_to_buy: 'Want to buy?',
         schedule: 'Schedule a Visit',
         booking: 'Booking.com',
-        airbnb: 'AriBnB'
+        airbnb: 'AriBnB',
+        direct: 'Book Directly'
     },
     about: {
         title: 'A Sanctuary of Luxury & Serenity',
@@ -69,9 +70,17 @@ export const LanguageZh = {
         email: 'Email',
         phone: 'Phone',
         date: 'Requested Date',
+        checkin_date: 'Check-in Date',
+        checkout_date: 'Check-out Date',
         other_requests: 'Other Requests',
+        no_of_guests: 'No: of Guests',
         send: 'Send Message',
+        request_book: 'Request Booking',
+        booking_req: 'Booking Request',
+        buying_req: 'Buying Request',
         or_call: 'Or call on:',
+        adult: 'Adult',
+        child: 'Child',
         success_heading: 'Email sent successfully!',
         success_message: 'We appreciate you contacting us in scheduling a visit. We will get back in touch with you soon! Have a great day!',
         failed_heading: 'Email sending failed!',
@@ -101,7 +110,9 @@ export const LanguageZh = {
         aerial_view: 'Aerial View',
         view: 'View',
         outer_area: 'Outer Area',
-        living_area: 'Living Area'
+        living_area: 'Living Area',
+        contact: 'Contact Us',
+        book_for_holiday: 'Book for Holiday'
     },
     common_desc: {
         combined_with_toilet: 'Combined with 1 toilet',

@@ -37,7 +37,7 @@
 
   <section class="main-content">
     <section id="home" class="hero" ref="sectionHomeRef">
-      <SectionHero/>
+      <SectionHero :set-form-type="setSelectedFormType"/>
     </section>
 
     <section id="about" class="section-about" ref="sectionAboutRef">
@@ -60,8 +60,8 @@
       <SectionView/>
     </section>
 
-    <section id="schedule" class="section-schedule" ref="sectionScheduleRef">
-      <SectionSchedule/>
+    <section id="contact" class="section-contact" ref="sectionContactRef">
+      <SectionContact :form-option="selectedFormType" :on-tab-change="setSelectedFormType"/>
     </section>
   </section>
 
@@ -102,7 +102,7 @@ import SectionHighlights from './main-sections/section-highlights.vue';
 import SectionFeatures from './main-sections/section-features.vue';
 import SectionGallery from './main-sections/section-gallery.vue';
 import SectionView from './main-sections/section-view.vue';
-import SectionSchedule from './main-sections/section-schedule.vue';
+import SectionContact from './main-sections/section-contact.vue';
 
 import AudioPlayer from './sub-components/audio-player.vue';
 
@@ -116,7 +116,7 @@ const navItems = ref([
   {id: 'highlights', tag: 'highlights'},
   {id: 'features', tag: 'features'},
   {id: 'gallery', tag: 'gallery'},
-  {id: 'schedule', tag: 'schedule'}
+  {id: 'contact', tag: 'contact'}
 ]);
 
 const sections = [];
@@ -126,7 +126,7 @@ const sectionHighlightsRef = ref();
 const sectionFeaturesRef = ref();
 const sectionGalleryRef = ref();
 const sectionViewRef = ref();
-const sectionScheduleRef = ref();
+const sectionContactRef = ref();
 
 const mobileNavOpen = ref(false);
 const activeMenuId = ref(navItems.value[0].id);
@@ -139,6 +139,8 @@ const languages = ref([
 const selectedLang = ref(languages.value[0].id);
 const localCurrentLangFile = ref(getCurrentLangFile());
 
+const selectedFormType = ref(Constants.FORM_TYPES.BOOK);
+
 let sectionTop, sectionId;
 
 onBeforeMount(() => {
@@ -147,7 +149,7 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-  sections.push(sectionHomeRef, sectionAboutRef, sectionHighlightsRef, sectionFeaturesRef, sectionGalleryRef, sectionViewRef, sectionScheduleRef);
+  sections.push(sectionHomeRef, sectionAboutRef, sectionHighlightsRef, sectionFeaturesRef, sectionGalleryRef, sectionViewRef, sectionContactRef);
 });
 
 onUnmounted(() => {
@@ -184,5 +186,9 @@ function closeNav() {
 const onChangeLang = (langID) => {
   selectedLang.value = langID;
   setCurrentLangFile(langID);
+}
+
+const setSelectedFormType = (formType) => {
+  selectedFormType.value = formType;
 }
 </script>

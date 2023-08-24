@@ -25,32 +25,6 @@ nav {
           @apply bg-tertiary;
         }
       }
-
-      &.dropdown {
-        @apply inline-block;
-
-        .dropdown-content {
-          @apply hidden absolute bg-secondary shadow-2xl min-w-[10rem];
-
-          > a {
-            @apply text-white px-4 py-2 decoration-0 block text-left;
-
-            &:hover {
-              @apply bg-primary transition;
-            }
-          }
-        }
-
-        &:hover {
-          .dropdown-button {
-            @apply bg-tertiary;
-          }
-
-          .dropdown-content {
-            display: block;
-          }
-        }
-      }
     }
   }
 
@@ -59,6 +33,32 @@ nav {
 
     ul.navmenu li {
       @apply text-black;
+    }
+  }
+}
+
+.dropdown {
+  @apply inline-block;
+
+  .dropdown-content {
+    @apply hidden absolute bg-secondary shadow-2xl min-w-[10rem] transition;
+
+    > a {
+      @apply text-white px-4 py-2 decoration-0 block text-left;
+
+      &:hover {
+        @apply bg-primary transition;
+      }
+    }
+  }
+
+  &:hover {
+    .dropdown-button {
+      @apply bg-tertiary cursor-pointer;
+    }
+
+    .dropdown-content {
+      display: block;
     }
   }
 }

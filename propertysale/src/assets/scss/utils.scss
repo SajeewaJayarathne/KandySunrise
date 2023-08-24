@@ -1,10 +1,16 @@
 /* Colours */
+$tertiary: rgba(196, 182, 191, 1);
 $blue_1: rgba(78, 89, 108, 1);
 $blue_2: rgba(218, 232, 241, 1);
 
 .glassmorphism {
   @apply bg-white/20 shadow-xl backdrop-blur-sm;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.glassmorphism-0 {
+  @apply bg-transparent shadow-none backdrop-blur-0;
+  border: none !important;
 }
 
 .overlay {

@@ -5,7 +5,7 @@
         v-for="tab in tabs"
         :key="tab.title"
         :class="selectedTabId === tab.tabId ? 'tab_active' : ''"
-        @click="onSelectTab(tab.tabId, tab.title)"
+        @click="onTabChange(tab.tabId)"
       >
         <button type="button" class="tabs_button font-bold">
           {{ tab.title }}
@@ -18,41 +18,34 @@
 </template>
 
 <script>
-import { ref, provide } from 'vue';
+import { ref, toRefs, provide, watchEffect } from 'vue';
 
 export default {
   props: {
-    onClickTab: {
+    onTabChange: {
       type: Function
+    },
+    selectedTabId: {
+      type: Number,
+      default: 0
     }
   },
   setup (props, { slots }) {
-    const customFunction = ref(props.onClickTab);
+    const {selectedTabId} = toRefs(props);
     const tabs = ref(slots.default().map((tab) => ({ title:tab.props.title, tabId:tab.props.tabId })));
 
-    const selectedTitle = ref(tabs.value[0].title);
-    const selectedTabId = ref(tabs.value[0].tabId);
+    const selectedTitle = ref(tabs.value[selectedTabId.value].title);
 
     provide('selectedTitle', selectedTitle);
-    callCustomFn(selectedTabId.value);
 
-    function onSelectTab (tabId, title) {
-      selectedTitle.value = title;
-      selectedTabId.value = tabId;
-      callCustomFn(tabId)
-    }
-
-    function callCustomFn (tabId) {
-      if (typeof customFunction.value === 'function') {
-        customFunction.value(tabId);
-      }
-    }
+    watchEffect(() => {
+      selectedTitle.value = tabs.value[selectedTabId.value].title;
+    });
 
     return {
       selectedTitle,
       selectedTabId,
-      tabs,
-      onSelectTab
+      tabs
     }
   }
 }

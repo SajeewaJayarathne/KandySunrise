@@ -1,0 +1,62 @@
+@import "utils";
+
+form.contact-form {
+  @apply p-4 lg:p-8 glassmorphism rounded-xl;
+
+  > div.form-content {
+    @apply grid gap-x-3 gap-y-5;
+
+    > div {
+      @apply flex flex-col w-full;
+
+      > input, > div > input, textarea {
+        @apply w-full p-2 pb-1 bg-transparent border-b-2 border-blue_1 text-blue_2;
+
+        &:focus-visible {
+          @apply outline-0 bg-tertiary/50;
+        }
+
+        &::-webkit-calendar-picker-indicator {
+          @apply cursor-pointer;
+          filter: invert(1);
+        }
+      }
+
+      input {
+        @apply h-10;
+      }
+
+      label {
+        @apply text-blue_2/70;
+      }
+    }
+  }
+}
+
+.form-group {
+  @apply flex px-1 pt-2;
+
+  &:last-child {
+    @apply pb-2;
+  }
+
+  >.control-label {
+    @apply text-sm font-bold px-3 m-auto;
+  }
+
+  button {
+    @apply text-blue_2/70;
+  }
+
+  > .input-group {
+    @apply flex;
+
+    >button {
+      @apply px-1;
+    }
+
+    > input {
+      @apply h-auto w-[4rem];
+    }
+  }
+}

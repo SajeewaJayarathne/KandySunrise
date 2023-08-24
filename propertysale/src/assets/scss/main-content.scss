@@ -155,7 +155,7 @@
     background: unset;
   }
 
-  &.section-schedule, &.section-highlights {
+  &.section-contact, &.section-highlights {
     &:before {
       @apply content-[""] absolute bg-secondary inset-0 opacity-80;
     }
