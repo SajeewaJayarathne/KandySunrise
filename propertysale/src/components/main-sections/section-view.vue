@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {ref, nextTick} from 'vue';
 
 import Popup from '../sub-components/popup.vue';
 import IconPlay from '../icons/icon-play.vue';
@@ -44,8 +44,11 @@ const localCurrentLang = ref(getCurrentLangFile());
 
 function openPopup() {
   showPopup.value = true;
-  videoPlayer.value?.play();
-  Utils.onModalStateChanged(true);
+
+  nextTick(() => {
+    videoPlayer.value?.play();
+    Utils.onModalStateChanged(true);
+  })
 }
 
 function closePopup() {

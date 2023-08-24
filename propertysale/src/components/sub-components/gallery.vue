@@ -1,11 +1,17 @@
 <template>
-  <Carousel id="gallery" class="gallery" :items-to-show="1" :wrap-around="false" v-model="currentSlide">
+  <Carousel
+    id="gallery"
+    class="gallery"
+    :items-to-show="1"
+    :wrap-around="false"
+    v-model="currentSlide"
+  >
     <Slide v-for="(slide, index) in slides" :key="index">
       <div class="carousel__item h-[50vh] lg:h-[80vh] w-full rounded relative">
         <img
-            :src="getImageUrl(slide)"
-            :alt="slide"
-            class="h-full w-full object-cover rounded cursor-pointer"
+            :src="slide.src"
+            :alt="slide.imgName"
+            class="h-full w-full rounded object-cover cursor-pointer"
             @click="handleImgClick(index)"
             loading="lazy"
         />
@@ -22,14 +28,14 @@
       :items-to-show="thumbnailCount"
       :wrap-around="false"
       v-model="currentSlide"
-      ref="carousel"
+      :snap-align="'start'"
       class="gallery-thumbnails hidden lg:block"
   >
     <Slide v-for="(slide, index) in slides" :key="index">
       <div class="carousel__item" @click="slideTo(index)">
         <img
-            :src="getImageUrl(slide)"
-            :alt="slide"
+            :src="slide.src"
+            :alt="slide.imgName"
             class="w-full h-auto object-cover aspect-4/3"
             :class="{'active-img': currentSlide === index}"
             loading="lazy"
@@ -39,66 +45,35 @@
   </Carousel>
 </template>
 
-<script>
-import {ref, toRefs, onMounted} from 'vue'
+<script setup>
+import {ref, defineProps} from 'vue'
+
 import {Carousel, Slide, Navigation} from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css'
 
-import Popup from '../sub-components/popup.vue';
-
-export default {
-  name: 'Gallery',
-  components: {
-    Popup,
-    Carousel,
-    Slide,
-    Navigation
+const props = defineProps({
+  slides: {
+    type: Array,
+    required: true
   },
-  props: {
-    slides: {
-      type: Array,
-      required: true
-    },
-    thumbnailCount: {
-      type: Number,
-      default: 5
-    },
-    openPopup: {
-      type: Function
-    }
+  thumbnailCount: {
+    type: Number,
+    default: 5
   },
-  setup(props) {
-    const {slides, thumbnailCount, openPopup} = toRefs(props);
-    const currentSlide = ref(0);
+  openPopup: {
+    type: Function
+  }
+});
 
-    onMounted(() => {
-      if (slides.value?.length < thumbnailCount.value) {
-        thumbnailCount.value = slides.value.length;
-      }
-    });
+const currentSlide = ref(0);
 
-    function slideTo(val) {
-      currentSlide.value = val;
-    }
+function slideTo(val) {
+  currentSlide.value = val;
+}
 
-    function handleImgClick(index) {
-      if (openPopup.value) {
-        openPopup.value(index);
-      }
-    }
-
-    const getImageUrl = (imgName) => {
-      return new URL(`/src/assets/images/${imgName}`, import.meta.url).href;
-    }
-
-    return {
-      currentSlide,
-      thumbnailCount,
-      slideTo,
-      handleImgClick,
-      getImageUrl
-    };
-
-  },
+function handleImgClick(index) {
+  if (props.openPopup) {
+    props.openPopup(index);
+  }
 }
 </script>

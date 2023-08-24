@@ -32,9 +32,9 @@
           class="h-full w-full object-cover rounded"
           loading="lazy"
       />
-      <div class="flex flex-col overflow-y-auto">
+      <div class="flex flex-col overflow-y-auto justify-center">
         <h4>{{ localCurrentLang.highlights.content[selectedSlide.tag] }}</h4>
-        <p class="mb-auto mt-4 lg:mt-12 leading-7">
+        <p class="mt-4 lg:mt-12 leading-7">
           {{ localCurrentLang.highlights.content[`${selectedSlide.tag}_desc`] }}</p>
       </div>
     </div>
@@ -43,11 +43,9 @@
 
 <script setup>
 import {ref} from 'vue';
-import {Slide} from 'vue3-carousel';
 import {getCurrentLangFile} from '../utils/state.vue';
 
 import Utils from '../utils/utils.js';
-import Carousel from '../sub-components/carousel.vue';
 import Popup from '../sub-components/popup.vue';
 
 const localCurrentLang = ref(getCurrentLangFile());

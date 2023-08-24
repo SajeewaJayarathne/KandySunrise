@@ -44,17 +44,6 @@
   }
 }
 
-/* Zoom */
-.zoom {
-  animation-name: animate-zoom;
-  animation-timing-function: ease;
-  will-change: transform, opacity;
-}
-@keyframes animate-zoom {
-  from {transform:scale(0); opacity: 0;}
-  to {transform:scale(1); opacity: 1;}
-}
-
 /* Spin */
 .spin {
   animation: spinner 2s linear infinite;
@@ -62,4 +51,28 @@
 @keyframes spinner {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
+}
+
+/* Zoom */
+.zoom-enter-active {
+  animation: zoom-in .8s;
+}
+
+.zoom-leave-active {
+  animation: zoom-in .8s reverse;
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

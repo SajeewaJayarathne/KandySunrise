@@ -8,7 +8,7 @@
   </h2>
 
   <div
-    class="mt-6 lg:mt-8 glassmorphism rounded-xl p-4 lg:p-10"
+    class="mt-6 lg:mt-10"
     data-aos="fade-in"
     data-aos-duration="1000"
   >
@@ -28,30 +28,30 @@
   </div>
 
   <Popup :open="showPopup" @close="showPopup = false">
-    <img
-        :src="getImageUrl(selectedSlide)"
-        :alt="selectedSlide"
-        class="h-full w-full object-cover rounded"
-        loading="lazy"
-    />
+<!--    <Gallery :slides="visibleImgArr" :first-slide="selectedSlideIdx" :is-popup="true"/>-->
+    <Swiper :slides="visibleImgArr" :initial-slide="selectedSlideIdx"></Swiper>
   </Popup>
+
 </template>
 
 <script setup>
-import {ref, onBeforeMount} from 'vue';
+import {ref, onBeforeMount, nextTick} from 'vue';
 
 import Utils from '../utils/utils';
 import {getCurrentLangFile} from '../utils/state.vue';
+
 import Gallery from '../sub-components/gallery.vue';
 import Popup from '../sub-components/popup.vue';
+import Swiper from "@/components/sub-components/swiper.vue";
 
 const localCurrentLang = ref(getCurrentLangFile());
 
 const showPopup = ref(false);
-const selectedSlide = ref(null);
+const selectedSlideIdx = ref(-1);
 
 const imgArraysByCat = ref({});
 const visibleImgArr = ref([]);
+const popupImgArr = ref([]);
 const imgCountByCat = ref({view: 8, outer: 8, livingArea: 6, floors: 6, bed: 8, bath: 3, pantry: 3, kitchen: 1});
 
 const filters = ref([
@@ -69,13 +69,14 @@ const selectedFilter = ref(filters.value[0].id);
 
 onBeforeMount(() => {
   Object.entries(imgCountByCat.value).forEach(([key, value]) => {
-    let imgName = '';
+    let imgName = '', imgUrl = '';
     imgArraysByCat.value[key] = [];
 
     for (let i = 1; i <= value; i++) {
       imgName = `${key.charAt(0).toUpperCase()}${key.slice(1)}_${i}.jpg`;
-      imgArraysByCat.value[key].push(imgName);
-      visibleImgArr.value.push(imgName);
+      imgUrl = getImageUrl(imgName);
+      imgArraysByCat.value[key].push({id: i, imgName: imgName, src: imgUrl});
+      visibleImgArr.value.push({id: i, imgName: imgName, src: imgUrl});
     }
 
     imgArraysByCat.value['all'] = [...visibleImgArr.value];
@@ -96,9 +97,11 @@ function onFilterChange(filterId) {
 }
 
 function openPopup(imgIndex) {
-  showPopup.value = true;
-  selectedSlide.value = visibleImgArr.value[imgIndex];
+  selectedSlideIdx.value = imgIndex;
 
-  Utils.onModalStateChanged(true);
+  nextTick(() => {
+    showPopup.value = true;
+    Utils.onModalStateChanged(true);
+  });
 }
 </script>

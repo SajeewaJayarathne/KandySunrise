@@ -10,7 +10,9 @@
   "dependencies": {
     "@vue/runtime-core": "^3.3.4",
     "aos": "^2.3.4",
+    "swiper": "^10.2.0",
     "vue": "^3.3.4",
+    "vue-awesome-swiper": "^5.0.1",
     "vue3-carousel": "^0.3.1"
   },
   "devDependencies": {
